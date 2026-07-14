@@ -1,4 +1,4 @@
-<img src="assets/scene-carousel.svg" alt="Rocky coding in 7 pixel-art worlds" />
+<img width="100%" src="assets/scene-carousel.svg" alt="Rocky coding in 7 pixel-art worlds" />
 
 # Hi, I'm Rocky Chi
 
