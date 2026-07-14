@@ -1,15 +1,15 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 115 34" width="115" height="34" font-family="system-ui, -apple-system, Segoe UI, sans-serif">
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 85 34" width="85" height="34" font-family="system-ui, -apple-system, Segoe UI, sans-serif">
   <style>
     .chip-text { fill: #e6edf3; font-size: 13px; dominant-baseline: central; }
     .chip-anim { animation: chipBob 2.6s ease-in-out infinite; }
     @keyframes chipBob { 0%,100%{transform:translateY(0)} 50%{transform:translateY(-3px)} }
     @media (prefers-reduced-motion: reduce) { .chip-anim { animation: none !important; } }
   </style>
-  <rect x="0" y="0" width="115" height="34" rx="17.0" fill="#322926" stroke="#8d5d3f"/>
+  <rect x="0" y="0" width="85" height="34" rx="17.0" fill="#322926" stroke="#8d5d3f"/>
   <g transform="translate(13.0,9.5)">
     <g class="chip-anim" style="animation-delay:1.5s" color="#ff8c42">
       <svg width="15" height="15" viewBox="0 0 24 24" style="overflow:visible"><circle cx="12" cy="12" r="9" fill="none" stroke="currentColor" stroke-width="2"/><path d="M3 12h18M12 3v18M5 6c4 3 10 3 14 0M5 18c4-3 10-3 14 0" fill="none" stroke="currentColor" stroke-width="1.5"/></svg>
     </g>
   </g>
-  <text class="chip-text" x="34.0" y="18.0">Basketball</text>
+  <text class="chip-text" x="34.0" y="18.0">Sports</text>
 </svg>

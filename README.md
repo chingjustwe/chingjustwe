@@ -13,7 +13,7 @@
   <img src="assets/badge-coffee.svg" height="34" alt="Coffee → Code" />&nbsp;
   <img src="assets/badge-hangzhou.svg" height="34" alt="Hangzhou" />&nbsp;
   <img src="assets/badge-games.svg" height="34" alt="Video Games" />&nbsp;
-  <img src="assets/badge-basketball.svg" height="34" alt="Basketball" />&nbsp;
+  <img src="assets/badge-sports.svg" height="34" alt="Sports" />&nbsp;
   <img src="assets/badge-rnb.svg" height="34" alt="R&B" />&nbsp;
   <img src="assets/badge-anime.svg" height="34" alt="Anime" />
 </p>
@@ -56,50 +56,58 @@
 
 **AI / Agent / AIOps**
 
-<img src="https://img.shields.io/badge/OpenCode-6B7280?style=flat-square" />
-<img src="https://img.shields.io/badge/n8n-EA4B71?logo=n8n&logoColor=white&style=flat-square" />
-<img src="https://img.shields.io/badge/LangChain-1C3C3C?logo=langchain&logoColor=white&style=flat-square" />
-<img src="https://img.shields.io/badge/LangGraph-1C3C3C?style=flat-square" />
-<img src="https://img.shields.io/badge/MCP-6B7280?style=flat-square" />
-<img src="https://img.shields.io/badge/Prompt_Eng-6B7280?style=flat-square" />
-<img src="https://img.shields.io/badge/Context_Eng-6B7280?style=flat-square" />
-<img src="https://img.shields.io/badge/RAG-6B7280?style=flat-square" />
+<p>
+  <img src="https://img.shields.io/badge/OpenCode-6B7280?style=flat-square" />&nbsp;
+  <img src="https://img.shields.io/badge/n8n-EA4B71?logo=n8n&logoColor=white&style=flat-square" />&nbsp;
+  <img src="https://img.shields.io/badge/LangChain-1C3C3C?logo=langchain&logoColor=white&style=flat-square" />&nbsp;
+  <img src="https://img.shields.io/badge/LangGraph-1C3C3C?style=flat-square" />&nbsp;
+  <img src="https://img.shields.io/badge/MCP-6B7280?style=flat-square" />&nbsp;
+  <img src="https://img.shields.io/badge/Prompt_Eng-6B7280?style=flat-square" />&nbsp;
+  <img src="https://img.shields.io/badge/Context_Eng-6B7280?style=flat-square" />&nbsp;
+  <img src="https://img.shields.io/badge/RAG-6B7280?style=flat-square" />
+</p>
 
 **Languages & Frameworks**
 
-<img src="https://img.shields.io/badge/Java-ED8B00?logo=openjdk&logoColor=white&style=flat-square" />
-<img src="https://img.shields.io/badge/TypeScript-3178C6?logo=typescript&logoColor=white&style=flat-square" />
-<img src="https://img.shields.io/badge/Python-3776AB?logo=python&logoColor=white&style=flat-square" />
-<img src="https://img.shields.io/badge/SQL-4479A1?logo=mysql&logoColor=white&style=flat-square" />
-<img src="https://img.shields.io/badge/Shell-4EAA25?logo=gnubash&logoColor=white&style=flat-square" />
-<img src="https://img.shields.io/badge/Spring_Boot-6DB33F?logo=springboot&logoColor=white&style=flat-square" />
-<img src="https://img.shields.io/badge/Spring_Cloud-6DB33F?logo=spring&logoColor=white&style=flat-square" />
-<img src="https://img.shields.io/badge/MyBatis-6B7280?style=flat-square" />
-<img src="https://img.shields.io/badge/Hibernate-59666C?logo=hibernate&logoColor=white&style=flat-square" />
+<p>
+  <img src="https://img.shields.io/badge/Java-ED8B00?logo=openjdk&logoColor=white&style=flat-square" />&nbsp;
+  <img src="https://img.shields.io/badge/TypeScript-3178C6?logo=typescript&logoColor=white&style=flat-square" />&nbsp;
+  <img src="https://img.shields.io/badge/Python-3776AB?logo=python&logoColor=white&style=flat-square" />&nbsp;
+  <img src="https://img.shields.io/badge/SQL-4479A1?logo=mysql&logoColor=white&style=flat-square" />&nbsp;
+  <img src="https://img.shields.io/badge/Shell-4EAA25?logo=gnubash&logoColor=white&style=flat-square" />&nbsp;
+  <img src="https://img.shields.io/badge/Spring_Boot-6DB33F?logo=springboot&logoColor=white&style=flat-square" />&nbsp;
+  <img src="https://img.shields.io/badge/Spring_Cloud-6DB33F?logo=spring&logoColor=white&style=flat-square" />&nbsp;
+  <img src="https://img.shields.io/badge/MyBatis-6B7280?style=flat-square" />&nbsp;
+  <img src="https://img.shields.io/badge/Hibernate-59666C?logo=hibernate&logoColor=white&style=flat-square" />
+</p>
 
 **Distributed & Data**
 
-<img src="https://img.shields.io/badge/Microservices-6B7280?style=flat-square" />
-<img src="https://img.shields.io/badge/Redis-DC382D?logo=redis&logoColor=white&style=flat-square" />
-<img src="https://img.shields.io/badge/Zookeeper-6B7280?style=flat-square" />
-<img src="https://img.shields.io/badge/Kafka-231F20?logo=apachekafka&logoColor=white&style=flat-square" />
-<img src="https://img.shields.io/badge/RabbitMQ-FF6600?logo=rabbitmq&logoColor=white&style=flat-square" />
-<img src="https://img.shields.io/badge/Oracle-F80000?logo=oracle&logoColor=white&style=flat-square" />
-<img src="https://img.shields.io/badge/PostgreSQL-4169E1?logo=postgresql&logoColor=white&style=flat-square" />
-<img src="https://img.shields.io/badge/MySQL-4479A1?logo=mysql&logoColor=white&style=flat-square" />
-<img src="https://img.shields.io/badge/OpenSearch-005EB8?logo=opensearch&logoColor=white&style=flat-square" />
+<p>
+  <img src="https://img.shields.io/badge/Microservices-6B7280?style=flat-square" />&nbsp;
+  <img src="https://img.shields.io/badge/Redis-DC382D?logo=redis&logoColor=white&style=flat-square" />&nbsp;
+  <img src="https://img.shields.io/badge/Zookeeper-6B7280?style=flat-square" />&nbsp;
+  <img src="https://img.shields.io/badge/Kafka-231F20?logo=apachekafka&logoColor=white&style=flat-square" />&nbsp;
+  <img src="https://img.shields.io/badge/RabbitMQ-FF6600?logo=rabbitmq&logoColor=white&style=flat-square" />&nbsp;
+  <img src="https://img.shields.io/badge/Oracle-F80000?logo=oracle&logoColor=white&style=flat-square" />&nbsp;
+  <img src="https://img.shields.io/badge/PostgreSQL-4169E1?logo=postgresql&logoColor=white&style=flat-square" />&nbsp;
+  <img src="https://img.shields.io/badge/MySQL-4479A1?logo=mysql&logoColor=white&style=flat-square" />&nbsp;
+  <img src="https://img.shields.io/badge/OpenSearch-005EB8?logo=opensearch&logoColor=white&style=flat-square" />
+</p>
 
 **DevOps / Observability**
 
-<img src="https://img.shields.io/badge/Docker-2496ED?logo=docker&logoColor=white&style=flat-square" />
-<img src="https://img.shields.io/badge/K8s-326CE5?logo=kubernetes&logoColor=white&style=flat-square" />
-<img src="https://img.shields.io/badge/CI%2FCD-6B7280?style=flat-square" />
-<img src="https://img.shields.io/badge/Prometheus-E6522C?logo=prometheus&logoColor=white&style=flat-square" />
-<img src="https://img.shields.io/badge/Grafana-F46800?logo=grafana&logoColor=white&style=flat-square" />
-<img src="https://img.shields.io/badge/Mimir-6B7280?style=flat-square" />
-<img src="https://img.shields.io/badge/OpenTelemetry-000000?logo=opentelemetry&logoColor=white&style=flat-square" />
-<img src="https://img.shields.io/badge/Splunk-65A637?logo=splunk&logoColor=white&style=flat-square" />
-<img src="https://img.shields.io/badge/Tempo-6B7280?style=flat-square" />
+<p>
+  <img src="https://img.shields.io/badge/Docker-2496ED?logo=docker&logoColor=white&style=flat-square" />&nbsp;
+  <img src="https://img.shields.io/badge/K8s-326CE5?logo=kubernetes&logoColor=white&style=flat-square" />&nbsp;
+  <img src="https://img.shields.io/badge/CI%2FCD-6B7280?style=flat-square" />&nbsp;
+  <img src="https://img.shields.io/badge/Prometheus-E6522C?logo=prometheus&logoColor=white&style=flat-square" />&nbsp;
+  <img src="https://img.shields.io/badge/Grafana-F46800?logo=grafana&logoColor=white&style=flat-square" />&nbsp;
+  <img src="https://img.shields.io/badge/Mimir-6B7280?style=flat-square" />&nbsp;
+  <img src="https://img.shields.io/badge/OpenTelemetry-000000?logo=opentelemetry&logoColor=white&style=flat-square" />&nbsp;
+  <img src="https://img.shields.io/badge/Splunk-65A637?logo=splunk&logoColor=white&style=flat-square" />&nbsp;
+  <img src="https://img.shields.io/badge/Tempo-6B7280?style=flat-square" />
+</p>
 
 ---
 
