@@ -1,0 +1,15 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 109 34" width="109" height="34" font-family="system-ui, -apple-system, Segoe UI, sans-serif">
+  <style>
+    .chip-text { fill: #e6edf3; font-size: 13px; dominant-baseline: central; }
+    .chip-anim { animation: chipBob 2.6s ease-in-out infinite; }
+    @keyframes chipBob { 0%,100%{transform:translateY(0)} 50%{transform:translateY(-3px)} }
+    @media (prefers-reduced-motion: reduce) { .chip-anim { animation: none !important; } }
+  </style>
+  <rect x="0" y="0" width="109" height="34" rx="17.0" fill="#1a313d" stroke="#347d94"/>
+  <g transform="translate(13.0,9.5)">
+    <g class="chip-anim" style="animation-delay:1.0s" color="#39d3ff">
+      <svg width="15" height="15" viewBox="0 0 24 24" style="overflow:visible"><path d="M12 2c-4 0-7 3-7 7 0 5 7 13 7 13s7-8 7-13c0-4-3-7-7-7z" fill="none" stroke="currentColor" stroke-width="2"/><circle cx="12" cy="9" r="2.5" fill="currentColor"/></svg>
+    </g>
+  </g>
+  <text class="chip-text" x="34.0" y="18.0">Hangzhou</text>
+</svg>

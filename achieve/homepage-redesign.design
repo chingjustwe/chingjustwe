@@ -1,0 +1,123 @@
+{
+  "data": [
+    {
+      "id": "page-index",
+      "title": "Rocky Chi Homepage",
+      "type": "page",
+      "version": 1,
+      "createdAt": 1783934204000,
+      "canvasData": {
+        "x": 0,
+        "y": 0,
+        "group": 0
+      },
+      "devMetadata": {
+        "htmlSrc": "pages/index.html",
+        "interactions": []
+      }
+    },
+    {
+      "id": "image-001",
+      "title": "Scene 1: IT Office",
+      "type": "image",
+      "version": 1,
+      "createdAt": 1783934204000,
+      "canvasData": {
+        "x": 0,
+        "y": 578
+      },
+      "devMetadata": {
+        "imageSrc": "assets/scene-1-office.jpg"
+      }
+    },
+    {
+      "id": "image-002",
+      "title": "Scene 2: Hyrule",
+      "type": "image",
+      "version": 1,
+      "createdAt": 1783934204000,
+      "canvasData": {
+        "x": 620,
+        "y": 578
+      },
+      "devMetadata": {
+        "imageSrc": "assets/scene-2-hyrule.jpg"
+      }
+    },
+    {
+      "id": "image-003",
+      "title": "Scene 3: AoT Walls",
+      "type": "image",
+      "version": 1,
+      "createdAt": 1783934204000,
+      "canvasData": {
+        "x": 1240,
+        "y": 578
+      },
+      "devMetadata": {
+        "imageSrc": "assets/scene-3-aot-walls.jpg"
+      }
+    },
+    {
+      "id": "image-004",
+      "title": "Scene 4: NBA Arena",
+      "type": "image",
+      "version": 1,
+      "createdAt": 1783934204000,
+      "canvasData": {
+        "x": 1860,
+        "y": 578
+      },
+      "devMetadata": {
+        "imageSrc": "assets/scene-4-nba-arena.jpg"
+      }
+    },
+    {
+      "id": "image-005",
+      "title": "Scene 5: HoK Canyon",
+      "type": "image",
+      "version": 1,
+      "createdAt": 1783934204000,
+      "canvasData": {
+        "x": 2480,
+        "y": 578
+      },
+      "devMetadata": {
+        "imageSrc": "assets/scene-5-hok-canyon.jpg"
+      }
+    },
+    {
+      "id": "image-006",
+      "title": "Scene 6: Thousand Sunny",
+      "type": "image",
+      "version": 1,
+      "createdAt": 1783934204000,
+      "canvasData": {
+        "x": 3100,
+        "y": 578
+      },
+      "devMetadata": {
+        "imageSrc": "assets/scene-6-sunny.jpg"
+      }
+    },
+    {
+      "id": "image-007",
+      "title": "Scene 7: Black Tangerine",
+      "type": "image",
+      "version": 1,
+      "createdAt": 1783934204000,
+      "canvasData": {
+        "x": 3720,
+        "y": 578
+      },
+      "devMetadata": {
+        "imageSrc": "assets/scene-7-black-tangerine.jpg"
+      }
+    }
+  ],
+  "config": {
+    "autoLayout": true,
+    "deviceType": "desktop",
+    "projectName": "Rocky Chi Homepage"
+  }
+}

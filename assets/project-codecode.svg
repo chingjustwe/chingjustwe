@@ -1,0 +1,28 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 300 150" preserveAspectRatio="xMidYMid meet">
+  <style>
+    text { font-family: "SFMono-Regular", Consolas, "Liberation Mono", monospace; }
+    .term-win { fill: #0b1220; stroke: #26344d; stroke-width: 1.5; }
+    .tdot.r { fill: #ff5f56; }
+    .tdot.y { fill: #ffbd2e; }
+    .tdot.g { fill: #27c93f; }
+    .term-title { fill: #5b6b86; font-size: 9px; }
+    .term-cmd { fill: #39d3ff; font-size: 12px; }
+    .term-ok { fill: #3ad1c0; font-size: 12px; }
+    .term-in { fill: #e6edf3; font-size: 12px; }
+    .caret { fill: #39d3ff; animation: blink 1s step-end infinite; }
+    @keyframes blink { 50% { opacity: 0; } }
+    @media (prefers-reduced-motion: reduce) {
+      .caret { animation: none !important; }
+    }
+  </style>
+  <rect x="0" y="0" width="300" height="150" fill="#0a0f1a" rx="8"/>
+  <rect class="term-win" x="26" y="16" width="248" height="118" rx="12"/>
+  <circle class="tdot r" cx="42" cy="30" r="4"/>
+  <circle class="tdot y" cx="56" cy="30" r="4"/>
+  <circle class="tdot g" cx="70" cy="30" r="4"/>
+  <text class="term-title" x="150" y="34" text-anchor="middle">codecode — zsh</text>
+  <text class="term-cmd" x="42" y="62">$ npx codecode init my-project</text>
+  <text class="term-ok" x="42" y="84">&gt; agent ready.</text>
+  <text class="term-in" x="42" y="106">&gt; create a REST API<tspan class="caret">&#9612;</tspan></text>
+  <text class="term-ok" x="42" y="128">&gt; API running on :3000</text>
+</svg>

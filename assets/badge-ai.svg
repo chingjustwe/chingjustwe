@@ -1,0 +1,15 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 138 34" width="138" height="34" font-family="system-ui, -apple-system, Segoe UI, sans-serif">
+  <style>
+    .chip-text { fill: #e6edf3; font-size: 13px; dominant-baseline: central; }
+    .chip-anim { animation: chipBob 2.6s ease-in-out infinite; }
+    @keyframes chipBob { 0%,100%{transform:translateY(0)} 50%{transform:translateY(-3px)} }
+    @media (prefers-reduced-motion: reduce) { .chip-anim { animation: none !important; } }
+  </style>
+  <rect x="0" y="0" width="138" height="34" rx="17.0" fill="#322638" stroke="#8d5583"/>
+  <g transform="translate(13.0,9.5)">
+    <g class="chip-anim" style="animation-delay:0.25s" color="#ff7ad9">
+      <svg width="15" height="15" viewBox="0 0 24 24" style="overflow:visible"><rect x="5" y="8" width="14" height="11" rx="3" fill="none" stroke="currentColor" stroke-width="2"/><circle cx="9" cy="13" r="1.6" fill="currentColor"/><circle cx="15" cy="13" r="1.6" fill="currentColor"/><path d="M12 5v3M9 5h6" stroke="currentColor" stroke-width="2"/><path d="M5 13H3M21 13h-2" stroke="currentColor" stroke-width="2"/></svg>
+    </g>
+  </g>
+  <text class="chip-text" x="34.0" y="18.0">Playing with AI</text>
+</svg>

@@ -1,0 +1,166 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 150" shape-rendering="crispEdges">
+  <style>
+    .screen-flicker { animation: flicker 2.4s infinite; }
+    @keyframes flicker { 0%,97%,100%{opacity:1} 98%{opacity:.4} 99%{opacity:.8} }
+    .blink { transform-box: fill-box; transform-origin: center; animation: blink 3.5s infinite; }
+    @keyframes blink { 0%,92%,100%{transform:scaleY(1)} 95%{transform:scaleY(.1)} }
+    .typing-l { transform-box: fill-box; transform-origin: bottom right; animation: typeL .3s infinite alternate; }
+    .typing-r { transform-box: fill-box; transform-origin: bottom left; animation: typeR .25s infinite alternate; }
+    @keyframes typeL { 0%{transform:rotate(0)} 100%{transform:rotate(-5deg)} }
+    @keyframes typeR { 0%{transform:rotate(0)} 100%{transform:rotate(5deg)} }
+    .head-bob { transform-box: fill-box; transform-origin: bottom center; animation: headBob 4s ease-in-out infinite; }
+    @keyframes headBob { 0%,100%{transform:rotate(0)} 25%{transform:rotate(-1.5deg)} 75%{transform:rotate(1.5deg)} }
+    .cursor-blink { animation: cblink 1s step-end infinite; }
+    @keyframes cblink { 50%{opacity:0} }
+    .steam { transform-box: fill-box; transform-origin: bottom center; animation: steamRise 2.5s ease-in-out infinite; }
+    @keyframes steamRise { 0%,100%{opacity:.3; transform:translateY(0) scaleY(1)} 50%{opacity:.6; transform:translateY(-3px) scaleY(1.2)} }
+    .glow { animation: glowPulse 2.5s ease-in-out infinite; }
+    @keyframes glowPulse { 0%,100%{opacity:.5} 50%{opacity:1} }
+    .char-shadow { filter: drop-shadow(0 2px 6px rgba(0,0,0,.5)); }
+    @media (prefers-reduced-motion: reduce) {
+      .screen-flicker,.blink,.typing-l,.typing-r,.head-bob,.cursor-blink,.steam,.glow { animation: none !important; }
+    }
+  </style>
+  <defs>
+    <linearGradient id="bgGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#0d1117"/>
+      <stop offset="100%" stop-color="#101a2e"/>
+    </linearGradient>
+    <linearGradient id="capGrad" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#000" stop-opacity="0"/>
+      <stop offset="100%" stop-color="#000" stop-opacity="0.82"/>
+    </linearGradient>
+  </defs>
+
+  <rect x="0" y="0" width="200" height="150" fill="url(#bgGrad)" rx="10"/>
+
+  <g class="char-shadow">
+    <rect x="4" y="108" width="192" height="6" fill="#2c2840"/>
+    <rect x="8" y="114" width="8" height="30" fill="#24203a"/>
+    <rect x="184" y="114" width="8" height="30" fill="#24203a"/>
+
+    <rect x="12" y="32" width="68" height="48" fill="#0d1117" stroke="#39d3ff" stroke-width="1.2"/>
+    <rect class="screen-flicker" x="15" y="35" width="62" height="42" fill="#0a1520"/>
+    <rect x="17" y="38" width="4" height="2" fill="#3a4a5a"/>
+    <rect x="17" y="43" width="4" height="2" fill="#3a4a5a"/>
+    <rect x="17" y="48" width="4" height="2" fill="#3a4a5a"/>
+    <rect x="17" y="53" width="4" height="2" fill="#3a4a5a"/>
+    <rect x="17" y="58" width="4" height="2" fill="#3a4a5a"/>
+    <rect x="17" y="63" width="4" height="2" fill="#3a4a5a"/>
+    <rect x="17" y="68" width="4" height="2" fill="#3a4a5a"/>
+    <rect x="24" y="38" width="18" height="2" fill="#ff7ad9"/>
+    <rect x="44" y="38" width="10" height="2" fill="#e6edf3"/>
+    <rect x="24" y="43" width="26" height="2" fill="#39d3ff"/>
+    <rect x="28" y="48" width="20" height="2" fill="#a6ff4d"/>
+    <rect x="28" y="53" width="30" height="2" fill="#e6edf3"/>
+    <rect x="28" y="58" width="14" height="2" fill="#ffd166"/>
+    <rect x="24" y="63" width="22" height="2" fill="#39d3ff"/>
+    <rect x="24" y="68" width="16" height="2" fill="#ff7ad9"/>
+    <rect class="cursor-blink" x="40" y="68" width="2" height="3" fill="#fff"/>
+    <rect x="40" y="80" width="12" height="5" fill="#2a2640"/>
+    <rect x="36" y="84" width="20" height="3" fill="#24203a"/>
+
+    <rect x="120" y="32" width="68" height="48" fill="#0d1117" stroke="#a6ff4d" stroke-width="1.2"/>
+    <rect class="screen-flicker" x="123" y="35" width="62" height="42" fill="#0a1810" style="animation-delay:.3s"/>
+    <rect x="125" y="37" width="3" height="3" fill="#ff5f56"/>
+    <rect x="130" y="37" width="3" height="3" fill="#ffbd2e"/>
+    <rect x="135" y="37" width="3" height="3" fill="#27c93f"/>
+    <rect x="125" y="44" width="6" height="2" fill="#a6ff4d"/>
+    <rect x="133" y="44" width="20" height="2" fill="#e6edf3"/>
+    <rect x="125" y="49" width="10" height="2" fill="#8b949e"/>
+    <rect x="125" y="54" width="6" height="2" fill="#a6ff4d"/>
+    <rect x="133" y="54" width="28" height="2" fill="#39d3ff"/>
+    <rect x="125" y="59" width="14" height="2" fill="#a6ff4d"/>
+    <rect x="141" y="59" width="10" height="2" fill="#ffd166"/>
+    <rect x="125" y="64" width="6" height="2" fill="#a6ff4d"/>
+    <rect x="133" y="64" width="22" height="2" fill="#e6edf3"/>
+    <rect x="125" y="69" width="16" height="2" fill="#a6ff4d"/>
+    <rect class="cursor-blink" x="143" y="69" width="2" height="3" fill="#a6ff4d"/>
+    <rect x="148" y="80" width="12" height="5" fill="#2a2640"/>
+    <rect x="144" y="84" width="20" height="3" fill="#24203a"/>
+
+    <rect x="76" y="102" width="48" height="6" fill="#2a2a3e" stroke="#3a3a50" stroke-width=".5"/>
+    <rect x="78" y="103" width="4" height="2" fill="#3a3a4e"/>
+    <rect x="83" y="103" width="4" height="2" fill="#3a3a4e"/>
+    <rect x="88" y="103" width="4" height="2" fill="#3a3a4e"/>
+    <rect x="93" y="103" width="4" height="2" fill="#3a3a4e"/>
+    <rect x="98" y="103" width="4" height="2" fill="#3a3a4e"/>
+    <rect x="103" y="103" width="4" height="2" fill="#3a3a4e"/>
+    <rect x="108" y="103" width="4" height="2" fill="#3a3a4e"/>
+    <rect x="113" y="103" width="4" height="2" fill="#3a3a4e"/>
+    <rect x="78" y="106" width="44" height="1.5" fill="#3a3a4e"/>
+
+    <rect x="160" y="96" width="10" height="12" fill="#3a3050"/>
+    <rect x="170" y="99" width="4" height="6" fill="none" stroke="#3a3050" stroke-width="1.5"/>
+    <rect x="162" y="98" width="6" height="4" fill="#5a3a20"/>
+    <rect class="steam" x="163" y="92" width="2" height="4" fill="#8b949e" opacity=".3"/>
+    <rect class="steam" x="166" y="90" width="2" height="5" fill="#8b949e" opacity=".3" style="animation-delay:.6s"/>
+
+    <rect x="82" y="86" width="36" height="22" fill="#1a1a2e"/>
+    <rect x="76" y="88" width="10" height="16" fill="#1a1a2e"/>
+    <rect x="114" y="88" width="10" height="16" fill="#1a1a2e"/>
+    <rect x="92" y="86" width="16" height="3" fill="#222240"/>
+    <rect x="98" y="89" width="4" height="16" fill="#222240"/>
+
+    <g class="typing-l">
+      <rect x="72" y="98" width="10" height="4" fill="#1a1a2e"/>
+      <rect x="70" y="100" width="6" height="4" fill="#f5d0a9"/>
+    </g>
+    <g class="typing-r">
+      <rect x="118" y="98" width="10" height="4" fill="#1a1a2e"/>
+      <rect x="124" y="100" width="6" height="4" fill="#f5d0a9"/>
+    </g>
+
+    <rect x="94" y="80" width="12" height="8" fill="#f5d0a9"/>
+
+    <g class="head-bob">
+      <rect x="82" y="40" width="36" height="42" fill="#f5d0a9"/>
+      <rect x="80" y="38" width="40" height="2" fill="#d4a574"/>
+      <rect x="80" y="38" width="2" height="46" fill="#d4a574"/>
+      <rect x="118" y="38" width="2" height="46" fill="#d4a574"/>
+      <rect x="80" y="82" width="40" height="2" fill="#d4a574"/>
+      <rect x="78" y="28" width="44" height="14" fill="#1a1a2e"/>
+      <rect x="76" y="32" width="6" height="16" fill="#1a1a2e"/>
+      <rect x="118" y="32" width="6" height="16" fill="#1a1a2e"/>
+      <rect x="82" y="22" width="10" height="8" fill="#1a1a2e"/>
+      <rect x="96" y="20" width="10" height="10" fill="#1a1a2e"/>
+      <rect x="108" y="22" width="10" height="8" fill="#1a1a2e"/>
+      <rect x="82" y="40" width="8" height="6" fill="#1a1a2e"/>
+      <rect x="90" y="40" width="4" height="3" fill="#1a1a2e"/>
+      <rect x="110" y="40" width="8" height="6" fill="#1a1a2e"/>
+      <rect x="106" y="40" width="4" height="3" fill="#1a1a2e"/>
+      <rect x="88" y="52" width="8" height="2" fill="#1a1a2e"/>
+      <rect x="104" y="52" width="8" height="2" fill="#1a1a2e"/>
+      <g class="blink">
+        <rect x="89" y="56" width="6" height="5" fill="#1a1a2e"/>
+        <rect x="105" y="56" width="6" height="5" fill="#1a1a2e"/>
+        <rect x="91" y="56" width="4" height="3" fill="#39d3ff"/>
+        <rect x="107" y="56" width="4" height="3" fill="#a6ff4d"/>
+        <rect x="90" y="57" width="2" height="2" fill="#fff"/>
+        <rect x="106" y="57" width="2" height="2" fill="#fff"/>
+      </g>
+      <rect x="86" y="54" width="12" height="10" fill="none" stroke="#111" stroke-width="2.5"/>
+      <rect x="102" y="54" width="12" height="10" fill="none" stroke="#111" stroke-width="2.5"/>
+      <rect x="98" y="58" width="4" height="2" fill="#111"/>
+      <rect x="88" y="56" width="4" height="3" fill="#39d3ff" fill-opacity="0.12"/>
+      <rect x="104" y="56" width="4" height="3" fill="#a6ff4d" fill-opacity="0.12"/>
+      <rect x="78" y="57" width="8" height="2" fill="#111"/>
+      <rect x="114" y="57" width="8" height="2" fill="#111"/>
+      <rect x="98" y="64" width="2" height="4" fill="#d4a574"/>
+      <rect x="94" y="72" width="12" height="2" fill="#c47a5a"/>
+      <path d="M72 48 Q70 22 100 16 Q130 22 128 48" fill="none" stroke="#333" stroke-width="4"/>
+      <path d="M86 18 Q100 14 114 18" fill="none" stroke="#444" stroke-width="5"/>
+      <rect x="66" y="44" width="12" height="16" fill="#222"/>
+      <rect x="68" y="46" width="8" height="12" fill="#2a2a3e"/>
+      <rect x="70" y="49" width="4" height="6" fill="#333"/>
+      <rect x="122" y="44" width="12" height="16" fill="#222"/>
+      <rect x="124" y="46" width="8" height="12" fill="#2a2a3e"/>
+      <rect x="126" y="49" width="4" height="6" fill="#333"/>
+      <rect x="71" y="50" width="2" height="4" fill="#a6ff4d" class="glow"/>
+      <rect x="127" y="50" width="2" height="4" fill="#a6ff4d" class="glow"/>
+    </g>
+  </g>
+
+  <rect x="0" y="128" width="200" height="22" fill="url(#capGrad)"/>
+  <text x="100" y="143" text-anchor="middle" fill="#e6edf3" font-size="6.5" font-family="system-ui, sans-serif">Debugging at the office. Same desk, different bugs.</text>
+</svg>

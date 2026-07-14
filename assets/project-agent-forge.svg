@@ -1,0 +1,84 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 300 150" preserveAspectRatio="xMidYMid meet">
+  <style>
+    .cap { fill: #8aa0bf; font-size: 8px; font-family: system-ui, sans-serif; text-anchor: middle; letter-spacing: .5px; }
+    .box { fill: #0f1726; stroke: #2a3650; stroke-width: 1.5; }
+    .box-top { stroke-width: 3; }
+    .glyph { color: #dbeaff; }
+    .lbl { fill: #e6edf3; font-size: 9px; font-weight: 700; font-family: system-ui, sans-serif; text-anchor: middle; }
+    .sub { fill: #8aa0bf; font-size: 6.5px; font-family: system-ui, sans-serif; text-anchor: middle; }
+    .flow { stroke: #34507a; stroke-width: 2; stroke-dasharray: 4 6; animation: dash 1s linear infinite; }
+    .arrow { fill: #5b7bb0; }
+    .tele { fill: #0c1a16; stroke: #1f5e4f; stroke-width: 1.5; }
+    .tele-lbl { fill: #6fe3c4; font-size: 8px; font-weight: 700; font-family: system-ui, sans-serif; text-anchor: middle; letter-spacing: .5px; }
+    .tele-link { stroke: #2f6f5e; stroke-width: 1; stroke-dasharray: 2 3; }
+    .pkt { fill: #ffd166; }
+    .pkt.run { animation: runPipe 2.6s linear infinite; }
+    .pulse { fill: #6fe3c4; animation: teleRun 3s linear infinite; }
+    @keyframes dash { to { stroke-dashoffset: -24; } }
+    @keyframes runPipe { 0% { transform: translateX(0); opacity: 0; } 8% { opacity: 1; } 92% { opacity: 1; } 100% { transform: translateX(217px); opacity: 0; } }
+    @keyframes teleRun { 0% { transform: translateX(0); opacity: 0; } 10% { opacity: 1; } 90% { opacity: 1; } 100% { transform: translateX(264px); opacity: 0; } }
+    @media (prefers-reduced-motion: reduce) {
+      .flow, .pkt.run, .pulse { animation: none !important; }
+    }
+  </style>
+  <defs>
+    <radialGradient id="bgGrad" cx="50%" cy="82%" r="80%">
+      <stop offset="0%" stop-color="#2c1707"/>
+      <stop offset="100%" stop-color="#0a0f1a"/>
+    </radialGradient>
+    <symbol id="i-shield" viewBox="0 0 24 24">
+      <path d="M12 2l8 3v6c0 5-4 9-8 11-4-2-8-6-8-11V5z" fill="none" stroke="currentColor" stroke-width="2"/>
+    </symbol>
+    <symbol id="i-brick" viewBox="0 0 24 24">
+      <rect x="3" y="6" width="18" height="12" rx="1" fill="none" stroke="currentColor" stroke-width="2"/>
+      <path d="M9 6v12M15 6v12M3 12h6M15 12h6" stroke="currentColor" stroke-width="1.5"/>
+    </symbol>
+    <symbol id="i-robot" viewBox="0 0 24 24">
+      <rect x="5" y="8" width="14" height="11" rx="3" fill="none" stroke="currentColor" stroke-width="2"/>
+      <circle cx="9" cy="13" r="1.6" fill="currentColor"/>
+      <circle cx="15" cy="13" r="1.6" fill="currentColor"/>
+      <path d="M12 5v3M9 5h6" stroke="currentColor" stroke-width="2"/>
+      <path d="M5 13H3M21 13h-2" stroke="currentColor" stroke-width="2"/>
+    </symbol>
+    <symbol id="i-spark" viewBox="0 0 24 24">
+      <path d="M12 3l1.8 5.2L19 10l-5.2 1.8L12 17l-1.8-5.2L5 10l5.2-1.8z" fill="currentColor"/>
+      <path d="M18 14l.7 2.1L21 17l-2.3.9L18 20l-.7-2.1L15 17l2.3-.9z" fill="currentColor"/>
+    </symbol>
+  </defs>
+  <rect x="0" y="0" width="300" height="150" fill="url(#bgGrad)" rx="8"/>
+  <text class="cap" x="150" y="20">self-hostable · multi-tenant</text>
+  <rect class="box" x="10" y="38" width="56" height="50" rx="9"/>
+  <rect class="box-top" x="10" y="38" width="56" height="6" rx="3" style="stroke:#39d3ff"/>
+  <use class="glyph" href="#i-shield" x="28" y="44" width="20" height="20" style="color:#39d3ff"/>
+  <text class="lbl" x="38" y="78">Gateway</text>
+  <text class="sub" x="38" y="87">auth · RBAC</text>
+  <rect class="box" x="82" y="38" width="56" height="50" rx="9"/>
+  <rect class="box-top" x="82" y="38" width="56" height="6" rx="3" style="stroke:#3ad1c0"/>
+  <use class="glyph" href="#i-brick" x="100" y="44" width="20" height="20" style="color:#3ad1c0"/>
+  <text class="lbl" x="110" y="78">Harness</text>
+  <text class="sub" x="110" y="87">guardrails</text>
+  <rect class="box" x="154" y="38" width="56" height="50" rx="9"/>
+  <rect class="box-top" x="154" y="38" width="56" height="6" rx="3" style="stroke:#b388ff"/>
+  <use class="glyph" href="#i-robot" x="172" y="44" width="20" height="20" style="color:#b388ff"/>
+  <text class="lbl" x="182" y="78">Runtime</text>
+  <text class="sub" x="182" y="87">agent</text>
+  <rect class="box" x="226" y="38" width="58" height="50" rx="9"/>
+  <rect class="box-top" x="226" y="38" width="58" height="6" rx="3" style="stroke:#ffb24d"/>
+  <use class="glyph" href="#i-spark" x="245" y="44" width="20" height="20" style="color:#ffb24d"/>
+  <text class="lbl" x="255" y="78">LLM API</text>
+  <text class="sub" x="255" y="87">stream</text>
+  <line class="flow" x1="67" y1="63" x2="79" y2="63"/>
+  <path class="arrow" d="M79 59 L79 67 L84 63 Z"/>
+  <line class="flow" x1="139" y1="63" x2="151" y2="63"/>
+  <path class="arrow" d="M151 59 L151 67 L156 63 Z"/>
+  <line class="flow" x1="211" y1="63" x2="223" y2="63"/>
+  <path class="arrow" d="M223 59 L223 67 L228 63 Z"/>
+  <circle class="pkt run" cx="38" cy="63" r="3"/>
+  <line class="tele-link" x1="38" y1="88" x2="38" y2="104"/>
+  <line class="tele-link" x1="110" y1="88" x2="110" y2="104"/>
+  <line class="tele-link" x1="182" y1="88" x2="182" y2="104"/>
+  <line class="tele-link" x1="255" y1="88" x2="255" y2="104"/>
+  <rect class="tele" x="10" y="104" width="274" height="20" rx="8"/>
+  <text class="tele-lbl" x="150" y="117">OpenTelemetry</text>
+  <circle class="pulse" cx="14" cy="114" r="3"/>
+</svg>

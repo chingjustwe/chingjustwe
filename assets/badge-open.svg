@@ -1,0 +1,15 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 159 34" width="159" height="34" font-family="system-ui, -apple-system, Segoe UI, sans-serif">
+  <style>
+    .chip-text { fill: #e6edf3; font-size: 13px; dominant-baseline: central; }
+    .chip-anim { animation: chipBob 2.6s ease-in-out infinite; }
+    @keyframes chipBob { 0%,100%{transform:translateY(0)} 50%{transform:translateY(-3px)} }
+    @media (prefers-reduced-motion: reduce) { .chip-anim { animation: none !important; } }
+  </style>
+  <rect x="0" y="0" width="159" height="34" rx="17.0" fill="#273627" stroke="#659044"/>
+  <g transform="translate(13.0,9.5)">
+    <g class="chip-anim" style="animation-delay:0.5s" color="#a6ff4d">
+      <svg width="15" height="15" viewBox="0 0 24 24" style="overflow:visible"><path d="M12 3l1.8 5.2L19 10l-5.2 1.8L12 17l-1.8-5.2L5 10l5.2-1.8z" fill="currentColor"/><path d="M18 14l.7 2.1L21 17l-2.3.9L18 20l-.7-2.1L15 17l2.3-.9z" fill="currentColor"/></svg>
+    </g>
+  </g>
+  <text class="chip-text" x="34.0" y="18.0">Open to cool stuff</text>
+</svg>

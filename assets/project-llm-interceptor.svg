@@ -1,0 +1,52 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 300 150" preserveAspectRatio="xMidYMid meet">
+  <style>
+    .panel { fill: #141c2b; stroke: #2a3650; stroke-width: 1.5; }
+    .bar { fill: #39d3ff; }
+    .bar.dim { fill: #33415c; }
+    .shield { fill: #0f1a2b; stroke: #39d3ff; stroke-width: 2; }
+    .check { fill: none; stroke: #39d3ff; stroke-width: 2.5; stroke-linecap: round; stroke-linejoin: round; }
+    .cloud > * { fill: #16203a; stroke: #2f3d5c; stroke-width: 1.5; }
+    .flow { stroke: #2f3b52; stroke-width: 2; stroke-dasharray: 5 7; animation: dash 1s linear infinite; }
+    .pkt { fill: #39d3ff; }
+    .pkt.a { animation: pktA 1.5s linear infinite; }
+    .pkt.b { animation: pktB 1.5s linear infinite; }
+    .chart { fill: none; stroke: #3ad1c0; stroke-width: 2; stroke-linejoin: round; stroke-dasharray: 420; stroke-dashoffset: 420; animation: draw 2.6s ease forwards; }
+    .live-dot { fill: #4ade80; animation: livePulse 1.4s ease-in-out infinite; }
+    .live-t { fill: #4ade80; font-size: 9px; font-weight: 700; font-family: system-ui, sans-serif; letter-spacing: 1px; }
+    @keyframes dash { to { stroke-dashoffset: -24; } }
+    @keyframes pktA { 0% { transform: translateX(0); opacity: 0; } 12% { opacity: 1; } 88% { opacity: 1; } 100% { transform: translateX(46px); opacity: 0; } }
+    @keyframes pktB { 0% { transform: translateX(0); opacity: 0; } 12% { opacity: 1; } 88% { opacity: 1; } 100% { transform: translateX(-46px); opacity: 0; } }
+    @keyframes draw { to { stroke-dashoffset: 0; } }
+    @keyframes livePulse { 0%,100% { opacity: 1; } 50% { opacity: .25; } }
+    @media (prefers-reduced-motion: reduce) {
+      .flow, .pkt.a, .pkt.b, .live-dot { animation: none !important; }
+      .chart { stroke-dashoffset: 0; animation: none !important; }
+    }
+  </style>
+  <defs>
+    <radialGradient id="bgGrad" cx="28%" cy="26%" r="80%">
+      <stop offset="0%" stop-color="#0e1c30"/>
+      <stop offset="100%" stop-color="#0a0f1a"/>
+    </radialGradient>
+  </defs>
+  <rect x="0" y="0" width="300" height="150" fill="url(#bgGrad)" rx="8"/>
+  <path class="flow" d="M66 74 H112"/>
+  <path class="flow" d="M188 74 H232"/>
+  <rect class="panel" x="22" y="55" width="44" height="38" rx="8"/>
+  <rect class="bar" x="30" y="63" width="28" height="5" rx="2"/>
+  <rect class="bar dim" x="30" y="72" width="20" height="4" rx="2"/>
+  <rect class="bar dim" x="30" y="80" width="24" height="4" rx="2"/>
+  <path class="shield" d="M150 48 l18 8 v16 q0 16 -18 24 q-18 -8 -18 -24 v-16 Z"/>
+  <path class="check" d="M142 74 l6 6 l11 -13"/>
+  <g class="cloud">
+    <circle cx="246" cy="72" r="11"/>
+    <circle cx="262" cy="66" r="13"/>
+    <circle cx="278" cy="73" r="10"/>
+    <rect x="238" y="72" width="46" height="14" rx="7"/>
+  </g>
+  <circle class="pkt a" cx="66" cy="74" r="3"/>
+  <circle class="pkt b" cx="232" cy="74" r="3"/>
+  <polyline class="chart" points="20,132 56,122 92,126 128,112 164,118 200,102 238,110 278,98"/>
+  <circle class="live-dot" cx="278" cy="20" r="4"/>
+  <text class="live-t" x="270" y="24" text-anchor="end">LIVE</text>
+</svg>

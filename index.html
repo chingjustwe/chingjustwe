@@ -1,0 +1,942 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Rocky Chi · 池忠强 — Homepage</title>
+<style>
+  :root {
+    --bg: #0d1117;
+    --bg-soft: #161b22;
+    --border: #30363d;
+    --text: #e6edf3;
+    --muted: #8b949e;
+    --neon: #39d3ff;
+    --neon2: #ff7ad9;
+    --neon3: #a6ff4d;
+    --accent: #ffd166;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  html { scroll-behavior: smooth; }
+  body {
+    background:
+      radial-gradient(1200px 600px at 80% -10%, rgba(57,211,255,.10), transparent 60%),
+      radial-gradient(900px 500px at -10% 20%, rgba(255,122,217,.08), transparent 55%),
+      var(--bg);
+    color: var(--text);
+    font-family: "Segoe UI", "PingFang SC", "Microsoft YaHei", system-ui, sans-serif;
+    line-height: 1.6;
+    min-height: 100vh;
+  }
+  a { color: var(--neon); text-decoration: none; }
+  a:hover { text-decoration: underline; }
+
+  /* ---------- Top bar ---------- */
+  .topbar {
+    position: sticky; top: 0; z-index: 50;
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 14px 28px;
+    background: rgba(13,17,23,.75);
+    backdrop-filter: blur(10px);
+    border-bottom: 1px solid var(--border);
+  }
+  .brand { font-weight: 700; letter-spacing: .5px; }
+  .brand span { color: var(--neon); }
+  .lang-btn {
+    cursor: pointer; border: 1px solid var(--border);
+    background: var(--bg-soft); color: var(--text);
+    padding: 6px 14px; border-radius: 999px; font-size: 14px;
+    transition: .2s;
+  }
+  .lang-btn:hover { border-color: var(--neon); color: var(--neon); }
+
+  /* ---------- Layout ---------- */
+  .wrap { max-width: 980px; margin: 0 auto; padding: 0 24px 80px; }
+  section { margin-top: 64px; }
+  .sec-title {
+    font-size: 22px; font-weight: 700; margin-bottom: 22px;
+    display: flex; align-items: center; gap: 10px;
+  }
+  .sec-title::before {
+    content: ""; width: 10px; height: 22px; border-radius: 3px;
+    background: linear-gradient(var(--neon), var(--neon2));
+  }
+  .sec-title small { color: var(--muted); font-weight: 400; font-size: 14px; }
+
+  /* ---------- Hero ---------- */
+  .hero { margin-top: 8px; }
+  .banner {
+    position: relative;
+    display: flex; align-items: center; gap: 30px;
+    padding: 24px 28px;
+    border: 1px solid var(--border);
+    border-radius: 18px;
+    overflow: hidden;
+    background: linear-gradient(135deg, #0d1117 0%, #101a2e 100%);
+    box-shadow: 0 10px 40px rgba(0,0,0,.4);
+  }
+  .banner::before { content:""; position:absolute; width:300px; height:300px; left:120px; top:-70px;
+    background: radial-gradient(circle, rgba(57,211,255,.16), transparent 70%); pointer-events:none; }
+  .banner::after { content:""; position:absolute; width:340px; height:340px; right:-40px; bottom:-90px;
+    background: radial-gradient(circle, rgba(255,122,217,.12), transparent 70%); pointer-events:none; }
+  .banner-visual { flex: 0 0 auto; display: flex; flex-direction: column; align-items: center; gap: 8px; }
+  .scene-stage {
+    width: 220px; height: 220px; max-width: 100%;
+    border-radius: 18px; overflow: hidden; position: relative;
+    border: 1px solid var(--border);
+    box-shadow: 0 0 40px rgba(57,211,255,.18);
+    background: var(--bg-soft);
+  }
+  .scene-bg {
+    position: absolute; inset: 0; width: 100%; height: 100%;
+    object-fit: cover; opacity: 0;
+    transition: opacity .7s ease;
+    image-rendering: pixelated;
+  }
+  .scene-bg.active { opacity: 1; }
+  .scene-character {
+    position: absolute; bottom: 18px; left: 50%; transform: translateX(-50%);
+    width: 185px; height: 139px; z-index: 2; pointer-events: none;
+    filter: drop-shadow(0 2px 6px rgba(0,0,0,.5));
+  }
+  .scene-caption {
+    position: absolute; bottom: 0; left: 0; right: 0; z-index: 3;
+    padding: 16px 8px 7px;
+    background: linear-gradient(transparent, rgba(0,0,0,.82));
+    text-align: center; font-size: 11px; color: #e6edf3;
+    line-height: 1.35; min-height: 28px;
+  }
+  .scene-dots { display: flex; gap: 7px; justify-content: center; }
+  .scene-dots button {
+    width: 8px; height: 8px; border-radius: 50%;
+    border: none; cursor: pointer; padding: 0;
+    background: var(--border); transition: .3s;
+  }
+  .scene-dots button.active { background: var(--neon); transform: scale(1.3); }
+  .banner-info { position: relative; z-index: 1; flex: 1 1 auto; min-width: 0; display: flex; flex-direction: column; justify-content: center; }
+  .banner-info h1 { font-size: 30px; line-height: 1.2; margin: 0; }
+  .banner-info h1 .cn { color: var(--muted); font-size: 20px; font-weight: 500; }
+  .banner-info .tagline { color: var(--text); margin: 12px 0 16px; font-size: 16px; }
+  .banner-info .tagline em { color: var(--accent); font-style: normal; }
+  .tagline-link { color: var(--neon); font-weight: 600; white-space: nowrap; }
+  .tagline-link:hover { text-decoration: underline; }
+  .chips { display: flex; flex-wrap: wrap; gap: 8px; }
+  .chip {
+    --accent: var(--muted);
+    font-size: 13px; padding: 5px 13px; border-radius: 999px;
+    background: color-mix(in srgb, var(--accent) 12%, var(--bg-soft));
+    border: 1px solid color-mix(in srgb, var(--accent) 45%, var(--border));
+    color: var(--text);
+  }
+  .chip.c-java   { --accent: #ff9f43; }
+  .chip.c-ai     { --accent: #ff7ad9; }
+  .chip.c-live   { --accent: #a6ff4d; }
+  .chip.c-coffee { --accent: #caa24a; }
+  .chip.c-pin    { --accent: #39d3ff; }
+  .chip.c-sport  { --accent: #ff8c42; }
+  .chip.c-music  { --accent: #b388ff; }
+  .chip.c-game   { --accent: #ff6b9d; }
+  .chip.c-anime  { --accent: #ff5d5d; }
+  .chips .ico { color: var(--accent); animation: chipBob 2.6s ease-in-out infinite; }
+  .chip:hover { border-color: var(--accent); transform: translateY(-1px); transition: .2s; }
+  .chips .chip:nth-child(1) .ico { animation-delay: 0s; }
+  .chips .chip:nth-child(2) .ico { animation-delay: .25s; }
+  .chips .chip:nth-child(3) .ico { animation-delay: .5s; }
+  .chips .chip:nth-child(4) .ico { animation-delay: .75s; }
+  .chips .chip:nth-child(5) .ico { animation-delay: 1s; }
+  .chips .chip:nth-child(6) .ico { animation-delay: 1.25s; }
+  .chips .chip:nth-child(7) .ico { animation-delay: 1.5s; }
+  .chips .chip:nth-child(8) .ico { animation-delay: 1.75s; }
+  .chips .chip:nth-child(9) .ico { animation-delay: 2s; }
+  @keyframes chipBob { 0%,100%{transform:translateY(0)} 50%{transform:translateY(-3px)} }
+
+  /* ---------- Hero CTA (Portfolio) ---------- */
+  .hero-cta { margin-top: 14px; display: flex; align-items: center; gap: 8px; flex-wrap: wrap; }
+  .btn-primary {
+    display: inline-flex; align-items: center; gap: 8px;
+    padding: 12px 22px; border-radius: 12px;
+    font-size: 14px; font-weight: 700; color: #04121a; text-decoration: none;
+    background: linear-gradient(135deg, #39d3ff, #3ad1c0);
+    box-shadow: 0 6px 20px rgba(57,211,255,.25);
+    transition: .2s;
+  }
+  .btn-primary:hover { transform: translateY(-2px); box-shadow: 0 10px 26px rgba(57,211,255,.4); color: #04121a; }
+  .btn-primary .ico { color: #04121a; }
+  .hero-cta-hint { color: var(--muted); font-size: 13px; max-width: 360px; }
+
+  /* ---------- SVG avatar animations ---------- */
+  .screen-flicker { animation: flicker 2.4s infinite; }
+  @keyframes flicker { 0%,97%,100%{opacity:1} 98%{opacity:.4} 99%{opacity:.8} }
+  .typing-hand { transform-box: fill-box; transform-origin: top left; animation: type .25s infinite; }
+  @keyframes type { 0%,100%{transform:rotate(0)} 50%{transform:rotate(7deg)} }
+  .blink { transform-box: fill-box; transform-origin: center; animation: blink 3.5s infinite; }
+  @keyframes blink { 0%,92%,100%{transform:scaleY(1)} 95%{transform:scaleY(.1)} }
+  .char-head { transform-box: fill-box; transform-origin: 75px 90px; animation: headTurn 7s ease-in-out infinite; }
+  @keyframes headTurn {
+    0%,100% { transform: rotate(0deg); }
+    20% { transform: rotate(-3deg); }
+    40% { transform: rotate(0deg); }
+    60% { transform: rotate(2.5deg); }
+    80% { transform: rotate(0deg); }
+  }
+  .glasses { animation: glassesGlow 3s ease-in-out infinite; }
+  @keyframes glassesGlow {
+    0%,100% { filter: brightness(1); }
+    50% { filter: brightness(1.4) drop-shadow(0 0 2px #39d3ff); }
+  }
+
+  .typing-l { transform-box: fill-box; transform-origin: bottom right; animation: typeL .3s infinite alternate; }
+  .typing-r { transform-box: fill-box; transform-origin: bottom left; animation: typeR .25s infinite alternate; }
+  @keyframes typeL { 0%{transform:rotate(0)} 100%{transform:rotate(-5deg)} }
+  @keyframes typeR { 0%{transform:rotate(0)} 100%{transform:rotate(5deg)} }
+  .head-bob { transform-box: fill-box; transform-origin: bottom center; animation: headBob 4s ease-in-out infinite; }
+  @keyframes headBob { 0%,100%{transform:rotate(0)} 25%{transform:rotate(-1.5deg)} 75%{transform:rotate(1.5deg)} }
+  .cursor-blink { animation: cblink 1s step-end infinite; }
+  @keyframes cblink { 50%{opacity:0} }
+  .steam { transform-box: fill-box; transform-origin: bottom center; animation: steamRise 2.5s ease-in-out infinite; }
+  @keyframes steamRise { 0%,100%{opacity:.3; transform:translateY(0) scaleY(1)} 50%{opacity:.6; transform:translateY(-3px) scaleY(1.2)} }
+  .screen-glow-pulse { animation: screenGlow 3s ease-in-out infinite; }
+  @keyframes screenGlow { 0%,100%{opacity:.04} 50%{opacity:.08} }
+  .glow { animation: glowPulse 2.5s ease-in-out infinite; }
+  @keyframes glowPulse { 0%,100%{opacity:.5} 50%{opacity:1} }
+
+  /* ---------- Projects ---------- */
+  .cards { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px,1fr)); gap: 16px; }
+  .card {
+    background: var(--bg-soft); border: 1px solid var(--border);
+    border-radius: 14px; padding: 18px; transition: .2s;
+    display: flex; flex-direction: column;
+  }
+  .card:hover { border-color: var(--neon); transform: translateY(-3px); }
+  .card h3 { font-size: 17px; display: flex; align-items: center; gap: 8px; }
+  .card p { color: var(--muted); font-size: 14px; margin: 8px 0 12px; }
+  .card .meta { font-size: 12px; color: var(--neon3); margin-top: auto; padding-top: 10px; }
+  .card-tags { display: flex; flex-wrap: wrap; gap: 6px; margin-bottom: 10px; }
+  .card-tags .tag {
+    font-size: 11px; padding: 2px 9px; border-radius: 20px;
+    background: rgba(57,211,255,.08); border: 1px solid rgba(57,211,255,.25);
+    color: var(--neon); white-space: nowrap;
+  }
+
+  /* ---------- Project card art (inline SVG illustrations) ---------- */
+  .card-art {
+    aspect-ratio: 2 / 1; border-radius: 12px; overflow: hidden;
+    margin-bottom: 14px; border: 1px solid var(--border);
+    background: #0a0f1a; position: relative;
+  }
+  .card-art .art { width: 100%; height: 100%; display: block; }
+  .gw    { background: radial-gradient(circle at 28% 26%, #0e1c30, #0a0f1a); }
+  .term  { background: #0a0f1a; }
+  .forge { background: radial-gradient(circle at 50% 82%, #2c1707, #0a0f1a); }
+
+  /* LLM Interceptor — gateway dashboard */
+  .gw .panel { fill: #141c2b; stroke: #2a3650; stroke-width: 1.5; }
+  .gw .bar { fill: #39d3ff; }
+  .gw .bar.dim { fill: #33415c; }
+  .gw .shield { fill: #0f1a2b; stroke: #39d3ff; stroke-width: 2; }
+  .gw .check { fill: none; stroke: #39d3ff; stroke-width: 2.5; stroke-linecap: round; stroke-linejoin: round; }
+  .gw .cloud > * { fill: #16203a; stroke: #2f3d5c; stroke-width: 1.5; }
+  .gw .flow { stroke: #2f3b52; stroke-width: 2; stroke-dasharray: 5 7; animation: dash 1s linear infinite; }
+  .gw .pkt { fill: #39d3ff; }
+  .gw .pkt.a { animation: pktA 1.5s linear infinite; }
+  .gw .pkt.b { animation: pktB 1.5s linear infinite; }
+  .gw .chart { fill: none; stroke: #3ad1c0; stroke-width: 2; stroke-linejoin: round;
+    stroke-dasharray: 420; stroke-dashoffset: 420; animation: draw 2.6s ease forwards; }
+  .gw .live-dot { fill: #4ade80; animation: livePulse 1.4s ease-in-out infinite; }
+  .gw .live-t { fill: #4ade80; font-size: 9px; font-weight: 700; font-family: system-ui, sans-serif; letter-spacing: 1px; }
+  @keyframes dash { to { stroke-dashoffset: -24; } }
+  @keyframes pktA { 0% { transform: translateX(0); opacity: 0; } 12% { opacity: 1; } 88% { opacity: 1; } 100% { transform: translateX(46px); opacity: 0; } }
+  @keyframes pktB { 0% { transform: translateX(0); opacity: 0; } 12% { opacity: 1; } 88% { opacity: 1; } 100% { transform: translateX(-46px); opacity: 0; } }
+  @keyframes draw { to { stroke-dashoffset: 0; } }
+  @keyframes livePulse { 0%,100% { opacity: 1; } 50% { opacity: .25; } }
+
+  /* CodeCode — terminal */
+  .term .term-win { fill: #0b1220; stroke: #26344d; stroke-width: 1.5; }
+  .term .tdot.r { fill: #ff5f56; } .term .tdot.y { fill: #ffbd2e; } .term .tdot.g { fill: #27c93f; }
+  .term text { font-family: "SFMono-Regular", Consolas, "Liberation Mono", monospace; }
+  .term .term-title { fill: #5b6b86; font-size: 9px; }
+  .term .term-cmd { fill: #39d3ff; font-size: 12px; }
+  .term .term-ok { fill: #3ad1c0; font-size: 12px; }
+  .term .term-in { fill: #e6edf3; font-size: 12px; }
+  .term .caret { fill: #39d3ff; animation: blink 1s step-end infinite; }
+  @keyframes blink { 50% { opacity: 0; } }
+
+  /* Agent Forge — architecture pipeline */
+  .forge .cap { fill: #8aa0bf; font-size: 8px; font-family: system-ui, sans-serif; text-anchor: middle; letter-spacing: .5px; }
+  .forge .box { fill: #0f1726; stroke: #2a3650; stroke-width: 1.5; }
+  .forge .box-top { stroke-width: 3; }
+  .forge .glyph { color: #dbeaff; }
+  .forge .lbl { fill: #e6edf3; font-size: 9px; font-weight: 700; font-family: system-ui, sans-serif; text-anchor: middle; }
+  .forge .sub { fill: #8aa0bf; font-size: 6.5px; font-family: system-ui, sans-serif; text-anchor: middle; }
+  .forge .flow { stroke: #34507a; stroke-width: 2; stroke-dasharray: 4 6; animation: dash 1s linear infinite; }
+  .forge .arrow { fill: #5b7bb0; }
+  .forge .tele { fill: #0c1a16; stroke: #1f5e4f; stroke-width: 1.5; }
+  .forge .tele-lbl { fill: #6fe3c4; font-size: 8px; font-weight: 700; font-family: system-ui, sans-serif; text-anchor: middle; letter-spacing: .5px; }
+  .forge .tele-link { stroke: #2f6f5e; stroke-width: 1; stroke-dasharray: 2 3; }
+  .forge .pkt { fill: #ffd166; }
+  .forge .pkt.run { animation: runPipe 2.6s linear infinite; }
+  .forge .pulse { fill: #6fe3c4; animation: teleRun 3s linear infinite; }
+  @keyframes runPipe { 0% { transform: translateX(0); opacity: 0; } 8% { opacity: 1; } 92% { opacity: 1; } 100% { transform: translateX(217px); opacity: 0; } }
+  @keyframes teleRun { 0% { transform: translateX(0); opacity: 0; } 10% { opacity: 1; } 90% { opacity: 1; } 100% { transform: translateX(264px); opacity: 0; } }
+
+  /* ---------- Tech stack ---------- */
+  .stack-group { margin-bottom: 18px; }
+  .stack-group h4 { color: var(--neon2); font-size: 14px; margin-bottom: 8px; letter-spacing: .5px; }
+  .stack-badges { display: flex; flex-wrap: wrap; gap: 6px; }
+  .stack-badges img { height: 24px; border-radius: 4px; transition: transform .2s; display: block; }
+  .stack-badges img:hover { transform: translateY(-2px); }
+
+  /* ---------- Contact ---------- */
+  .contact { display: flex; flex-wrap: wrap; gap: 12px; }
+  .contact a {
+    display: inline-flex; align-items: center; gap: 8px;
+    padding: 10px 16px; border-radius: 10px;
+    background: var(--bg-soft); border: 1px solid var(--border);
+    color: var(--text); font-size: 14px;
+  }
+  .contact a:hover { border-color: var(--neon); color: var(--neon); text-decoration: none; }
+
+  footer { text-align: center; color: var(--muted); font-size: 13px; margin-top: 70px; }
+
+  [data-i18n] { } /* hook */
+
+  @media (max-width: 680px) {
+    .banner { flex-direction: column; text-align: center; }
+    .banner-svg { width: 170px; height: 170px; }
+    .chips, .contact { justify-content: center; }
+  }
+
+  @media (max-width: 480px) {
+    .scene-stage { width: 180px; height: 180px; }
+    .scene-character { width: 152px; height: 114px; bottom: 14px; }
+  }
+
+  /* ---------- SVG icons ---------- */
+  .ico { width: 15px; height: 15px; vertical-align: -2px; flex: none; }
+  .chips .ico { margin-right: 6px; }
+  .sec-title .ico { width: 18px; height: 18px; vertical-align: -3px; margin-right: 8px; }
+  .card h3 .ico { width: 18px; height: 18px; vertical-align: -3px; margin-right: 7px; }
+  .contact a .ico { width: 16px; height: 16px; vertical-align: -3px; margin-right: 7px; }
+  .contact .chip .ico { margin-right: 5px; color: var(--neon); }
+  .lang-btn .ico { width: 15px; height: 15px; vertical-align: -2px; margin-right: 4px; }
+
+  @media (prefers-reduced-motion: reduce) {
+    .screen-flicker, .typing-hand, .typing-l, .typing-r, .blink, .char-head, .head-bob, .glasses, .glow, .cursor-blink, .steam, .screen-glow-pulse { animation: none !important; }
+    .scene-bg { transition: none !important; }
+  }
+</style>
+</head>
+<body>
+  <!-- ============ SVG icon sprite ============ -->
+  <svg width="0" height="0" style="position:absolute" aria-hidden="true">
+    <defs>
+      <symbol id="i-globe" viewBox="0 0 24 24">
+        <circle cx="12" cy="12" r="9" fill="none" stroke="currentColor" stroke-width="2"/>
+        <path d="M3 12h18M12 3c3 3 3 15 0 18M12 3c-3 3-3 15 0 18" fill="none" stroke="currentColor" stroke-width="2"/>
+      </symbol>
+      <symbol id="i-pin" viewBox="0 0 24 24">
+        <path d="M12 2c-4 0-7 3-7 7 0 5 7 13 7 13s7-8 7-13c0-4-3-7-7-7z" fill="none" stroke="currentColor" stroke-width="2"/>
+        <circle cx="12" cy="9" r="2.5" fill="currentColor"/>
+      </symbol>
+      <symbol id="i-linkedin" viewBox="0 0 24 24"><path fill="currentColor" d="M19 3a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h14m-.5 15.5v-5.3a3.26 3.26 0 0 0-3.26-3.26c-.85 0-1.84.52-2.32 1.3v-1.11h-2.79v8.37h2.79v-4.93c0-.77.62-1.4 1.39-1.4a1.4 1.4 0 0 1 1.4 1.4v4.93h2.79M6.88 8.56a1.68 1.68 0 0 0 1.68-1.68c0-.93-.75-1.69-1.68-1.69a1.69 1.69 0 0 0-1.69 1.69c0 .93.76 1.68 1.69 1.68m1.39 9.94v-8.37H5.5v8.37h2.77z"/></symbol>
+      <symbol id="i-shield" viewBox="0 0 24 24">
+        <path d="M12 2l8 3v6c0 5-4 9-8 11-4-2-8-6-8-11V5z" fill="none" stroke="currentColor" stroke-width="2"/>
+      </symbol>
+      <symbol id="i-code" viewBox="0 0 24 24">
+        <rect x="4" y="5" width="16" height="11" rx="2" fill="none" stroke="currentColor" stroke-width="2"/>
+        <path d="M2 20h20" stroke="currentColor" stroke-width="2"/>
+        <path d="M9 9l-2 2 2 2M15 9l2 2-2 2" fill="none" stroke="currentColor" stroke-width="1.6"/>
+      </symbol>
+      <symbol id="i-flame" viewBox="0 0 24 24">
+        <path d="M12 2c1 4 5 5 5 9a5 5 0 0 1-10 0c0-2 1-3 2-4 0 2 1 3 2 3 0-3-1-5 1-8z" fill="none" stroke="currentColor" stroke-width="2"/>
+      </symbol>
+      <symbol id="i-palette" viewBox="0 0 24 24">
+        <path d="M12 3a9 9 0 1 0 0 18c1 0 2-1 2-2 0-1 1-2 2-2h1a3 3 0 0 0 3-3c0-4-4-9-9-9z" fill="none" stroke="currentColor" stroke-width="2"/>
+        <circle cx="8" cy="11" r="1.2" fill="currentColor"/>
+        <circle cx="12.5" cy="8" r="1.2" fill="currentColor"/>
+        <circle cx="16" cy="11" r="1.2" fill="currentColor"/>
+      </symbol>
+      <symbol id="i-pen" viewBox="0 0 24 24">
+        <path d="M4 20l4-1 9-9-3-3-9 9z" fill="none" stroke="currentColor" stroke-width="2"/>
+        <path d="M14 7l3 3" stroke="currentColor" stroke-width="2"/>
+      </symbol>
+      <symbol id="i-robot" viewBox="0 0 24 24">
+        <rect x="5" y="8" width="14" height="11" rx="3" fill="none" stroke="currentColor" stroke-width="2"/>
+        <circle cx="9" cy="13" r="1.6" fill="currentColor"/>
+        <circle cx="15" cy="13" r="1.6" fill="currentColor"/>
+        <path d="M12 5v3M9 5h6" stroke="currentColor" stroke-width="2"/>
+        <path d="M5 13H3M21 13h-2" stroke="currentColor" stroke-width="2"/>
+      </symbol>
+      <symbol id="i-brackets" viewBox="0 0 24 24">
+        <path d="M8 5L4 12l4 7M16 5l4 7-4 7" fill="none" stroke="currentColor" stroke-width="2"/>
+      </symbol>
+      <symbol id="i-blocks" viewBox="0 0 24 24">
+        <rect x="3" y="3" width="8" height="8" rx="1" fill="none" stroke="currentColor" stroke-width="2"/>
+        <rect x="13" y="3" width="8" height="8" rx="1" fill="none" stroke="currentColor" stroke-width="2"/>
+        <rect x="3" y="13" width="8" height="8" rx="1" fill="none" stroke="currentColor" stroke-width="2"/>
+        <rect x="13" y="13" width="8" height="8" rx="1" fill="none" stroke="currentColor" stroke-width="2"/>
+      </symbol>
+      <symbol id="i-monitor" viewBox="0 0 24 24">
+        <rect x="3" y="4" width="18" height="13" rx="2" fill="none" stroke="currentColor" stroke-width="2"/>
+        <path d="M6 10l3 3 3-5 3 4 3-3" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round" stroke-linecap="round"/>
+        <path d="M9 21h6M12 17v4" stroke="currentColor" stroke-width="2"/>
+      </symbol>
+      <symbol id="i-ball" viewBox="0 0 24 24">
+        <circle cx="12" cy="12" r="9" fill="none" stroke="currentColor" stroke-width="2"/>
+        <path d="M3 12h18M12 3v18M5 6c4 3 10 3 14 0M5 18c4-3 10-3 14 0" fill="none" stroke="currentColor" stroke-width="1.5"/>
+      </symbol>
+      <symbol id="i-leaf" viewBox="0 0 24 24">
+        <path d="M5 19c0-8 6-14 14-14 0 8-6 14-14 14z" fill="none" stroke="currentColor" stroke-width="2"/>
+        <path d="M5 19C9 13 13 9 17 7" fill="none" stroke="currentColor" stroke-width="1.5"/>
+      </symbol>
+      <symbol id="i-brick" viewBox="0 0 24 24">
+        <rect x="3" y="6" width="18" height="12" rx="1" fill="none" stroke="currentColor" stroke-width="2"/>
+        <path d="M9 6v12M15 6v12M3 12h6M15 12h6" stroke="currentColor" stroke-width="1.5"/>
+      </symbol>
+      <symbol id="i-crown" viewBox="0 0 24 24">
+        <path d="M3 8l4 4 5-7 5 7 4-4-2 11H5z" fill="none" stroke="currentColor" stroke-width="2"/>
+      </symbol>
+      <symbol id="i-boat" viewBox="0 0 24 24">
+        <path d="M3 15h18l-3 5H6z" fill="none" stroke="currentColor" stroke-width="2"/>
+        <path d="M12 4v10M12 4l6 8H12z" fill="none" stroke="currentColor" stroke-width="2"/>
+      </symbol>
+      <symbol id="i-butterfly" viewBox="0 0 24 24">
+        <path d="M12 12C9 4 2 5 3 10c1 5 7 5 9 2zM12 12c3-8 10-7 9-2-1 5-7 5-9 2z" fill="none" stroke="currentColor" stroke-width="1.6"/>
+        <path d="M12 12c-2 3-6 4-6 9 3 0 6-2 6-6zM12 12c2 3 6 4 6 9-3 0-6-2-6-6z" fill="none" stroke="currentColor" stroke-width="1.6"/>
+        <path d="M12 4v14" stroke="currentColor" stroke-width="1.6"/>
+      </symbol>
+      <symbol id="i-building" viewBox="0 0 24 24">
+        <rect x="5" y="3" width="14" height="18" rx="1" fill="none" stroke="currentColor" stroke-width="2"/>
+        <path d="M9 7h2M13 7h2M9 11h2M13 11h2M9 15h2M13 15h2M10 21v-3h4v3" stroke="currentColor" stroke-width="1.5" fill="none"/>
+      </symbol>
+      <symbol id="i-github" viewBox="0 0 24 24">
+        <path fill="currentColor" d="M12 2C6.48 2 2 6.58 2 12.25c0 4.53 2.87 8.37 6.84 9.73.5.1.68-.22.68-.49 0-.24-.01-.88-.01-1.73-2.78.6-3.37-1.37-3.37-1.37-.45-1.18-1.11-1.5-1.11-1.5-.91-.64.07-.62.07-.62 1 .07 1.53 1 1.53 1 .89 1.56 2.34 1.11 2.91.85.09-.66.35-1.11.63-1.37-2.22-.26-4.55-1.14-4.55-5.07 0-1.12.39-2.03 1.03-2.75-.1-.26-.45-1.31.1-2.73 0 0 .84-.27 2.75 1.05a9.3 9.3 0 0 1 5 0c1.91-1.32 2.75-1.05 2.75-1.05.55 1.42.2 2.47.1 2.73.64.72 1.03 1.63 1.03 2.75 0 3.94-2.34 4.81-4.57 5.06.36.32.68.94.68 1.9 0 1.37-.01 2.47-.01 2.81 0 .27.18.6.69.49A10.02 10.02 0 0 0 22 12.25C22 6.58 17.52 2 12 2z"/>
+      </symbol>
+      <symbol id="i-term" viewBox="0 0 24 24">
+        <rect x="3" y="4" width="18" height="16" rx="3" fill="none" stroke="currentColor" stroke-width="2"/>
+        <path d="M6 10l3 2-3 2M11 15h5" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+      </symbol>
+      <symbol id="i-cup" viewBox="0 0 24 24">
+        <path d="M5 10h12v5a4 4 0 0 1-4 4H9a4 4 0 0 1-4-4z" fill="none" stroke="currentColor" stroke-width="2"/>
+        <path d="M17 11h2a2 2 0 0 1 0 4h-2" fill="none" stroke="currentColor" stroke-width="2"/>
+        <path d="M8 3c-1 1.5 1 2.5 0 4M12 3c-1 1.5 1 2.5 0 4" fill="none" stroke="currentColor" stroke-width="1.5"/>
+      </symbol>
+      <symbol id="i-spark" viewBox="0 0 24 24">
+        <path d="M12 3l1.8 5.2L19 10l-5.2 1.8L12 17l-1.8-5.2L5 10l5.2-1.8z" fill="currentColor"/>
+        <path d="M18 14l.7 2.1L21 17l-2.3.9L18 20l-.7-2.1L15 17l2.3-.9z" fill="currentColor"/>
+      </symbol>
+      <symbol id="i-trophy" viewBox="0 0 24 24">
+        <path d="M7 4h10v4a5 5 0 0 1-10 0z" fill="none" stroke="currentColor" stroke-width="2"/>
+        <path d="M7 5H4v2a3 3 0 0 0 3 3M17 5h3v2a3 3 0 0 1-3 3" fill="none" stroke="currentColor" stroke-width="2"/>
+        <path d="M12 13v4M9 21h6M10 17h4v4h-4z" fill="none" stroke="currentColor" stroke-width="2"/>
+      </symbol>
+      <symbol id="i-mail" viewBox="0 0 24 24">
+        <rect x="3" y="5" width="18" height="14" rx="2" fill="none" stroke="currentColor" stroke-width="2"/>
+        <path d="M3 7l9 6 9-6" fill="none" stroke="currentColor" stroke-width="2"/>
+      </symbol>
+      <symbol id="i-note" viewBox="0 0 24 24">
+        <path d="M15 6V17" fill="none" stroke="currentColor" stroke-width="2"/>
+        <ellipse cx="9" cy="17" rx="3.5" ry="2.6" fill="currentColor"/>
+        <path d="M15 6q4 -1 4 3" fill="none" stroke="currentColor" stroke-width="2"/>
+      </symbol>
+      <symbol id="i-dumbbell" viewBox="0 0 24 24">
+        <rect x="3" y="9" width="3" height="6" rx="1" fill="currentColor"/>
+        <rect x="18" y="9" width="3" height="6" rx="1" fill="currentColor"/>
+        <rect x="7" y="10" width="2" height="4" fill="currentColor"/>
+        <rect x="15" y="10" width="2" height="4" fill="currentColor"/>
+        <rect x="9" y="11" width="6" height="2" fill="currentColor"/>
+      </symbol>
+      <symbol id="i-game" viewBox="0 0 24 24">
+        <rect x="3" y="8" width="18" height="9" rx="4" fill="none" stroke="currentColor" stroke-width="2"/>
+        <path d="M7 12h3M8.5 10.5v3" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+        <circle cx="16" cy="11.5" r="1.1" fill="currentColor"/>
+        <circle cx="18" cy="13.5" r="1.1" fill="currentColor"/>
+      </symbol>
+      <symbol id="i-guitar" viewBox="0 0 24 24">
+        <path d="M14 2l8 8-2 2-3-1-4 4q1 2-1 4-2 2-4 1t-2-4q0-3 2-4t4 1l4-4-1-3z" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/>
+        <circle cx="8" cy="16" r="2" fill="none" stroke="currentColor" stroke-width="1.4"/>
+      </symbol>
+      <symbol id="i-anime" viewBox="0 0 24 24">
+        <circle cx="12" cy="12" r="9" fill="none" stroke="currentColor" stroke-width="2"/>
+        <circle cx="9" cy="11" r="2.2" fill="currentColor"/>
+        <circle cx="15" cy="11" r="2.2" fill="currentColor"/>
+        <path d="M8 16q4 3 8 0" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+      </symbol>
+    </defs>
+  </svg>
+
+  <div class="topbar">
+    <div class="brand">rocky<span>.dev</span></div>
+    <button class="lang-btn" id="langBtn" onclick="toggleLang()"><svg class="ico"><use href="#i-globe"/></svg> 中文</button>
+  </div>
+
+  <div class="wrap">
+
+    <!-- HERO -->
+    <section class="hero" id="top">
+      <div class="banner">
+<div class="banner-visual">
+          <div class="scene-stage" id="sceneStage">
+            <img class="scene-bg active" src="assets/scene-1-office.jpg" alt="">
+            <img class="scene-bg" src="assets/scene-2-hyrule.jpg" alt="">
+            <img class="scene-bg" src="assets/scene-3-aot-walls.jpg" alt="">
+            <img class="scene-bg" src="assets/scene-4-nba-arena.jpg" alt="">
+            <img class="scene-bg" src="assets/scene-5-hok-canyon.jpg" alt="">
+            <img class="scene-bg" src="assets/scene-6-sunny.jpg" alt="">
+            <img class="scene-bg" src="assets/scene-7-black-tangerine.jpg" alt="">
+            <svg class="scene-character" viewBox="0 0 200 150" shape-rendering="crispEdges" xmlns="http://www.w3.org/2000/svg">
+              <!-- === DESK === -->
+              <rect x="4" y="108" width="192" height="6" fill="#2c2840"/>
+              <rect x="8" y="114" width="8" height="30" fill="#24203a"/>
+              <rect x="184" y="114" width="8" height="30" fill="#24203a"/>
+
+              <!-- === LEFT MONITOR: IDE code === -->
+              <rect x="12" y="32" width="68" height="48" fill="#0d1117" stroke="#39d3ff" stroke-width="1.2"/>
+              <rect class="screen-flicker" x="15" y="35" width="62" height="42" fill="#0a1520"/>
+              <!-- line numbers -->
+              <rect x="17" y="38" width="4" height="2" fill="#3a4a5a"/>
+              <rect x="17" y="43" width="4" height="2" fill="#3a4a5a"/>
+              <rect x="17" y="48" width="4" height="2" fill="#3a4a5a"/>
+              <rect x="17" y="53" width="4" height="2" fill="#3a4a5a"/>
+              <rect x="17" y="58" width="4" height="2" fill="#3a4a5a"/>
+              <rect x="17" y="63" width="4" height="2" fill="#3a4a5a"/>
+              <rect x="17" y="68" width="4" height="2" fill="#3a4a5a"/>
+              <!-- code lines -->
+              <rect x="24" y="38" width="18" height="2" fill="#ff7ad9"/>
+              <rect x="44" y="38" width="10" height="2" fill="#e6edf3"/>
+              <rect x="24" y="43" width="26" height="2" fill="#39d3ff"/>
+              <rect x="28" y="48" width="20" height="2" fill="#a6ff4d"/>
+              <rect x="28" y="53" width="30" height="2" fill="#e6edf3"/>
+              <rect x="28" y="58" width="14" height="2" fill="#ffd166"/>
+              <rect x="24" y="63" width="22" height="2" fill="#39d3ff"/>
+              <rect x="24" y="68" width="16" height="2" fill="#ff7ad9"/>
+              <rect class="cursor-blink" x="40" y="68" width="2" height="3" fill="#fff"/>
+              <!-- stand -->
+              <rect x="40" y="80" width="12" height="5" fill="#2a2640"/>
+              <rect x="36" y="84" width="20" height="3" fill="#24203a"/>
+
+              <!-- === RIGHT MONITOR: Terminal === -->
+              <rect x="120" y="32" width="68" height="48" fill="#0d1117" stroke="#a6ff4d" stroke-width="1.2"/>
+              <rect class="screen-flicker" x="123" y="35" width="62" height="42" fill="#0a1810" style="animation-delay:.3s"/>
+              <!-- terminal dots -->
+              <rect x="125" y="37" width="3" height="3" fill="#ff5f56"/>
+              <rect x="130" y="37" width="3" height="3" fill="#ffbd2e"/>
+              <rect x="135" y="37" width="3" height="3" fill="#27c93f"/>
+              <!-- terminal text -->
+              <rect x="125" y="44" width="6" height="2" fill="#a6ff4d"/>
+              <rect x="133" y="44" width="20" height="2" fill="#e6edf3"/>
+              <rect x="125" y="49" width="10" height="2" fill="#8b949e"/>
+              <rect x="125" y="54" width="6" height="2" fill="#a6ff4d"/>
+              <rect x="133" y="54" width="28" height="2" fill="#39d3ff"/>
+              <rect x="125" y="59" width="14" height="2" fill="#a6ff4d"/>
+              <rect x="141" y="59" width="10" height="2" fill="#ffd166"/>
+              <rect x="125" y="64" width="6" height="2" fill="#a6ff4d"/>
+              <rect x="133" y="64" width="22" height="2" fill="#e6edf3"/>
+              <rect x="125" y="69" width="16" height="2" fill="#a6ff4d"/>
+              <rect class="cursor-blink" x="143" y="69" width="2" height="3" fill="#a6ff4d"/>
+              <!-- stand -->
+              <rect x="148" y="80" width="12" height="5" fill="#2a2640"/>
+              <rect x="144" y="84" width="20" height="3" fill="#24203a"/>
+
+              <!-- === KEYBOARD === -->
+              <rect x="76" y="102" width="48" height="6" fill="#2a2a3e" stroke="#3a3a50" stroke-width=".5"/>
+              <rect x="78" y="103" width="4" height="2" fill="#3a3a4e"/>
+              <rect x="83" y="103" width="4" height="2" fill="#3a3a4e"/>
+              <rect x="88" y="103" width="4" height="2" fill="#3a3a4e"/>
+              <rect x="93" y="103" width="4" height="2" fill="#3a3a4e"/>
+              <rect x="98" y="103" width="4" height="2" fill="#3a3a4e"/>
+              <rect x="103" y="103" width="4" height="2" fill="#3a3a4e"/>
+              <rect x="108" y="103" width="4" height="2" fill="#3a3a4e"/>
+              <rect x="113" y="103" width="4" height="2" fill="#3a3a4e"/>
+              <rect x="78" y="106" width="44" height="1.5" fill="#3a3a4e"/>
+
+              <!-- === COFFEE === -->
+              <rect x="160" y="96" width="10" height="12" fill="#3a3050"/>
+              <rect x="170" y="99" width="4" height="6" fill="none" stroke="#3a3050" stroke-width="1.5"/>
+              <rect x="162" y="98" width="6" height="4" fill="#5a3a20"/>
+              <rect class="steam" x="163" y="92" width="2" height="4" fill="#8b949e" opacity=".3"/>
+              <rect class="steam" x="166" y="90" width="2" height="5" fill="#8b949e" opacity=".3" style="animation-delay:.6s"/>
+
+              <!-- === CHARACTER (centered, upper body) === -->
+              <rect x="82" y="86" width="36" height="22" fill="#1a1a2e"/>
+              <rect x="76" y="88" width="10" height="16" fill="#1a1a2e"/>
+              <rect x="114" y="88" width="10" height="16" fill="#1a1a2e"/>
+              <!-- hoodie detail -->
+              <rect x="92" y="86" width="16" height="3" fill="#222240"/>
+              <rect x="98" y="89" width="4" height="16" fill="#222240"/>
+
+              <!-- arms to keyboard -->
+              <g class="typing-l">
+                <rect x="72" y="98" width="10" height="4" fill="#1a1a2e"/>
+                <rect x="70" y="100" width="6" height="4" fill="#f5d0a9"/>
+              </g>
+              <g class="typing-r">
+                <rect x="118" y="98" width="10" height="4" fill="#1a1a2e"/>
+                <rect x="124" y="100" width="6" height="4" fill="#f5d0a9"/>
+              </g>
+
+              <!-- neck -->
+              <rect x="94" y="80" width="12" height="8" fill="#f5d0a9"/>
+
+              <!-- HEAD -->
+              <g class="head-bob">
+                <rect x="82" y="40" width="36" height="42" fill="#f5d0a9"/>
+                <rect x="80" y="38" width="40" height="2" fill="#d4a574"/>
+                <rect x="80" y="38" width="2" height="46" fill="#d4a574"/>
+                <rect x="118" y="38" width="2" height="46" fill="#d4a574"/>
+                <rect x="80" y="82" width="40" height="2" fill="#d4a574"/>
+
+                <!-- hair -->
+                <rect x="78" y="28" width="44" height="14" fill="#1a1a2e"/>
+                <rect x="76" y="32" width="6" height="16" fill="#1a1a2e"/>
+                <rect x="118" y="32" width="6" height="16" fill="#1a1a2e"/>
+                <!-- spikes -->
+                <rect x="82" y="22" width="10" height="8" fill="#1a1a2e"/>
+                <rect x="96" y="20" width="10" height="10" fill="#1a1a2e"/>
+                <rect x="108" y="22" width="10" height="8" fill="#1a1a2e"/>
+                <!-- fringe -->
+                <rect x="82" y="40" width="8" height="6" fill="#1a1a2e"/>
+                <rect x="90" y="40" width="4" height="3" fill="#1a1a2e"/>
+                <rect x="110" y="40" width="8" height="6" fill="#1a1a2e"/>
+                <rect x="106" y="40" width="4" height="3" fill="#1a1a2e"/>
+
+                <!-- eyebrows -->
+                <rect x="88" y="52" width="8" height="2" fill="#1a1a2e"/>
+                <rect x="104" y="52" width="8" height="2" fill="#1a1a2e"/>
+
+                <!-- eyes -->
+                <g class="blink">
+                  <rect x="89" y="56" width="6" height="5" fill="#1a1a2e"/>
+                  <rect x="105" y="56" width="6" height="5" fill="#1a1a2e"/>
+                  <rect x="91" y="56" width="4" height="3" fill="#39d3ff"/>
+                  <rect x="107" y="56" width="4" height="3" fill="#a6ff4d"/>
+                  <rect x="90" y="57" width="2" height="2" fill="#fff"/>
+                  <rect x="106" y="57" width="2" height="2" fill="#fff"/>
+                </g>
+
+                <!-- glasses -->
+                <rect x="86" y="54" width="12" height="10" fill="none" stroke="#111" stroke-width="2.5"/>
+                <rect x="102" y="54" width="12" height="10" fill="none" stroke="#111" stroke-width="2.5"/>
+                <rect x="98" y="58" width="4" height="2" fill="#111"/>
+                <rect x="88" y="56" width="4" height="3" fill="rgba(57,211,255,.12)"/>
+                <rect x="104" y="56" width="4" height="3" fill="rgba(166,255,77,.12)"/>
+                <rect x="78" y="57" width="8" height="2" fill="#111"/>
+                <rect x="114" y="57" width="8" height="2" fill="#111"/>
+
+                <!-- nose -->
+                <rect x="98" y="64" width="2" height="4" fill="#d4a574"/>
+
+                <!-- mouth: concentrating -->
+                <rect x="94" y="72" width="12" height="2" fill="#c47a5a"/>
+
+                <!-- headphones -->
+                <path d="M72 48 Q70 22 100 16 Q130 22 128 48" fill="none" stroke="#333" stroke-width="4"/>
+                <path d="M86 18 Q100 14 114 18" fill="none" stroke="#444" stroke-width="5"/>
+                <rect x="66" y="44" width="12" height="16" fill="#222"/>
+                <rect x="68" y="46" width="8" height="12" fill="#2a2a3e"/>
+                <rect x="70" y="49" width="4" height="6" fill="#333"/>
+                <rect x="122" y="44" width="12" height="16" fill="#222"/>
+                <rect x="124" y="46" width="8" height="12" fill="#2a2a3e"/>
+                <rect x="126" y="49" width="4" height="6" fill="#333"/>
+                <rect x="71" y="50" width="2" height="4" fill="#a6ff4d" class="glow"/>
+                <rect x="127" y="50" width="2" height="4" fill="#a6ff4d" class="glow"/>
+              </g>
+            </svg>
+            <div class="scene-caption" id="sceneCaption"></div>
+          </div>
+          <div class="scene-dots" id="sceneDots">
+            <button class="active" aria-label="Scene 1"></button>
+            <button aria-label="Scene 2"></button>
+            <button aria-label="Scene 3"></button>
+            <button aria-label="Scene 4"></button>
+            <button aria-label="Scene 5"></button>
+            <button aria-label="Scene 6"></button>
+            <button aria-label="Scene 7"></button>
+          </div>
+        </div>
+        <div class="banner-info">
+          <h1>Rocky Chi <span class="cn">池忠强</span></h1>
+          <p class="tagline" data-en='Backend engineer who accidentally became an <em>AI whisperer</em>. I make agents behave — most of the time. <a class="tagline-link" href="https://chingjustwe.github.io/portfolio/" target="_blank">longer version of me →</a>'
+             data-cn='一个不小心变成 <em>AI 驯兽师</em> 的后端工程师。我让 Agent 学会守规矩——大部分时候。<a class="tagline-link" href="https://chingjustwe.github.io/portfolio/" target="_blank">我的加长版 →</a>'>
+             Backend engineer who accidentally became an <em>AI whisperer</em>. I make agents behave — most of the time. <a class="tagline-link" href="https://chingjustwe.github.io/portfolio/" target="_blank">longer version of me →</a>
+          </p>
+
+        <div class="chips">
+          <span class="chip c-java" data-en="Coding" data-cn="写代码"><svg class="ico"><use href="#i-cup"/></svg> Coding</span>
+          <span class="chip c-ai" data-en="Playing with AI" data-cn="玩 AI"><svg class="ico"><use href="#i-robot"/></svg> Playing with AI</span>
+          <span class="chip c-live" data-en="Open to cool stuff" data-cn="欢迎有意思的合作"><svg class="ico"><use href="#i-spark"/></svg> Open to cool stuff</span>
+          <span class="chip c-coffee" data-en="Coffee → Code" data-cn="咖啡 → 代码"><svg class="ico"><use href="#i-term"/></svg> Coffee → Code</span>
+          <span class="chip c-pin" data-en="Hangzhou" data-cn="杭州"><svg class="ico"><use href="#i-pin"/></svg> Hangzhou</span>
+          <span class="chip c-game" data-en="Video Games" data-cn="电子游戏"><svg class="ico"><use href="#i-game"/></svg> Video Games</span>
+          <span class="chip c-sport" data-en="Basketball" data-cn="篮球"><svg class="ico"><use href="#i-ball"/></svg> Basketball</span>
+          <span class="chip c-music" data-en="R&amp;B" data-cn="R&amp;B"><svg class="ico"><use href="#i-guitar"/></svg> R&amp;B</span>
+          <span class="chip c-anime" data-en="Anime" data-cn="动漫"><svg class="ico"><use href="#i-anime"/></svg> Anime</span>
+        </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- PROJECTS -->
+    <section id="projects">
+      <div class="sec-title"><span data-en="Projects" data-cn="项目">Projects</span> <small data-en="things I broke &amp; built" data-cn="我搞坏过也造出来的东西">things I broke &amp; built</small></div>
+      <div class="cards">
+        <div class="card">
+          <div class="card-art">
+            <svg class="art gw" viewBox="0 0 300 150" preserveAspectRatio="xMidYMid meet" xmlns="http://www.w3.org/2000/svg">
+              <path class="flow" d="M66 74 H112"/>
+              <path class="flow" d="M188 74 H232"/>
+              <rect class="panel" x="22" y="55" width="44" height="38" rx="8"/>
+              <rect class="bar" x="30" y="63" width="28" height="5" rx="2"/>
+              <rect class="bar dim" x="30" y="72" width="20" height="4" rx="2"/>
+              <rect class="bar dim" x="30" y="80" width="24" height="4" rx="2"/>
+              <path class="shield" d="M150 48 l18 8 v16 q0 16 -18 24 q-18 -8 -18 -24 v-16 Z"/>
+              <path class="check" d="M142 74 l6 6 l11 -13"/>
+              <g class="cloud">
+                <circle cx="246" cy="72" r="11"/>
+                <circle cx="262" cy="66" r="13"/>
+                <circle cx="278" cy="73" r="10"/>
+                <rect x="238" y="72" width="46" height="14" rx="7"/>
+              </g>
+              <circle class="pkt a" cx="66" cy="74" r="3"/>
+              <circle class="pkt b" cx="232" cy="74" r="3"/>
+              <polyline class="chart" points="20,132 56,122 92,126 128,112 164,118 200,102 238,110 278,98"/>
+              <circle class="live-dot" cx="278" cy="20" r="4"/>
+              <text class="live-t" x="270" y="24" text-anchor="end">LIVE</text>
+            </svg>
+          </div>
+          <h3><svg class="ico"><use href="#i-shield"/></svg> LLM Interceptor</h3>
+          <p data-en="Peek under the hood of every LLM call. Like a firewall, but for your prompts." data-cn="窥探每一次 LLM 调用的底裤。像防火墙，但是管你的 prompt。">Peek under the hood of every LLM call. Like a firewall, but for your prompts.</p>
+          <div class="card-tags"><span class="tag">Go</span><span class="tag">Bytecode</span><span class="tag">Guardrails</span></div>
+          <a class="meta" href="https://chingjustwe.github.io/llm-interceptor/" target="_blank">→ live demo</a>
+        </div>
+        <div class="card">
+          <div class="card-art">
+            <svg class="art term" viewBox="0 0 300 150" preserveAspectRatio="xMidYMid meet" xmlns="http://www.w3.org/2000/svg">
+              <rect class="term-win" x="26" y="16" width="248" height="118" rx="12"/>
+              <circle class="tdot r" cx="42" cy="30" r="4"/>
+              <circle class="tdot y" cx="56" cy="30" r="4"/>
+              <circle class="tdot g" cx="70" cy="30" r="4"/>
+              <text class="term-title" x="150" y="34" text-anchor="middle">codecode — zsh</text>
+              <text class="term-cmd" x="42" y="62">$ npx codecode init my-project</text>
+              <text class="term-ok" x="42" y="84">&gt; agent ready.</text>
+              <text class="term-in" x="42" y="106">&gt; create a REST API<tspan class="caret">▋</tspan></text>
+              <text class="term-ok" x="42" y="128">&gt; API running on :3000</text>
+            </svg>
+          </div>
+          <h3><svg class="ico"><use href="#i-code"/></svg> CodeCode</h3>
+          <p data-en="Code snippets that actually run. Less README lies, more working examples." data-cn="真正能跑的代码片段。少点 README 谎言，多点能用的例子。">Code snippets that actually run. Less README lies, more working examples.</p>
+          <div class="card-tags"><span class="tag">React</span><span class="tag">Monaco</span><span class="tag">Live Code</span></div>
+          <a class="meta" href="https://chingjustwe.github.io/codecode/" target="_blank">→ live demo</a>
+        </div>
+        <div class="card">
+          <div class="card-art">
+            <svg class="art forge" viewBox="0 0 300 150" preserveAspectRatio="xMidYMid meet" xmlns="http://www.w3.org/2000/svg">
+              <text class="cap" x="150" y="20">self-hostable · multi-tenant</text>
+              <!-- Gateway -->
+              <rect class="box" x="10" y="38" width="56" height="50" rx="9"/>
+              <rect class="box-top" x="10" y="38" width="56" height="6" rx="3" style="stroke:#39d3ff"/>
+              <use class="glyph" href="#i-shield" x="28" y="44" width="20" height="20" style="color:#39d3ff"/>
+              <text class="lbl" x="38" y="78">Gateway</text>
+              <text class="sub" x="38" y="87">auth · RBAC</text>
+              <!-- Harness -->
+              <rect class="box" x="82" y="38" width="56" height="50" rx="9"/>
+              <rect class="box-top" x="82" y="38" width="56" height="6" rx="3" style="stroke:#3ad1c0"/>
+              <use class="glyph" href="#i-brick" x="100" y="44" width="20" height="20" style="color:#3ad1c0"/>
+              <text class="lbl" x="110" y="78">Harness</text>
+              <text class="sub" x="110" y="87">guardrails</text>
+              <!-- Runtime -->
+              <rect class="box" x="154" y="38" width="56" height="50" rx="9"/>
+              <rect class="box-top" x="154" y="38" width="56" height="6" rx="3" style="stroke:#b388ff"/>
+              <use class="glyph" href="#i-robot" x="172" y="44" width="20" height="20" style="color:#b388ff"/>
+              <text class="lbl" x="182" y="78">Runtime</text>
+              <text class="sub" x="182" y="87">agent</text>
+              <!-- LLM API -->
+              <rect class="box" x="226" y="38" width="58" height="50" rx="9"/>
+              <rect class="box-top" x="226" y="38" width="58" height="6" rx="3" style="stroke:#ffb24d"/>
+              <use class="glyph" href="#i-spark" x="245" y="44" width="20" height="20" style="color:#ffb24d"/>
+              <text class="lbl" x="255" y="78">LLM API</text>
+              <text class="sub" x="255" y="87">stream</text>
+              <!-- flow arrows -->
+              <line class="flow" x1="67" y1="63" x2="79" y2="63"/>
+              <path class="arrow" d="M79 59 L79 67 L84 63 Z"/>
+              <line class="flow" x1="139" y1="63" x2="151" y2="63"/>
+              <path class="arrow" d="M151 59 L151 67 L156 63 Z"/>
+              <line class="flow" x1="211" y1="63" x2="223" y2="63"/>
+              <path class="arrow" d="M223 59 L223 67 L228 63 Z"/>
+              <!-- request packet travelling through the pipeline -->
+              <circle class="pkt run" cx="38" cy="63" r="3"/>
+              <!-- telemetry wrapping every execution -->
+              <line class="tele-link" x1="38" y1="88" x2="38" y2="104"/>
+              <line class="tele-link" x1="110" y1="88" x2="110" y2="104"/>
+              <line class="tele-link" x1="182" y1="88" x2="182" y2="104"/>
+              <line class="tele-link" x1="255" y1="88" x2="255" y2="104"/>
+              <rect class="tele" x="10" y="104" width="274" height="20" rx="8"/>
+              <text class="tele-lbl" x="150" y="117">OpenTelemetry</text>
+              <circle class="pulse" cx="14" cy="114" r="3"/>
+            </svg>
+          </div>
+          <h3><svg class="ico"><use href="#i-robot"/></svg> Agent Forge</h3>
+          <p data-en="Agents that don't misbehave in production. Gateway bouncer → guardrail harness → runtime, with observability side-eyeing every step." data-cn="让 Agent 在生产环境也别乱来。门口保安（Gateway）→ 护栏（Harness）→ 运行时，可观测性在旁边斜眼盯着每一步。">Agents that don't misbehave in production. Gateway bouncer → guardrail harness → runtime, with observability side-eyeing every step.</p>
+          <div class="card-tags"><span class="tag">Python</span><span class="tag">Gateway</span><span class="tag">Observability</span></div>
+          <a class="meta" href="https://chingjustwe.github.io/agent-forge/" target="_blank">→ live demo</a>
+        </div>
+      </div>
+    </section>
+
+    <!-- TECH STACK -->
+    <section id="stack">
+      <div class="sec-title"><span data-en="Tech Stack" data-cn="技术栈">Tech Stack</span> <small data-en="what's in the toolbox" data-cn="工具箱里都有啥">what's in the toolbox</small></div>
+
+      <div class="stack-group">
+        <h4 data-en="AI / Agent / AIOps" data-cn="AI / Agent / AIOps"><svg class="ico"><use href="#i-robot"/></svg> AI / Agent / AIOps</h4>
+        <div class="stack-badges">
+          <img src="https://img.shields.io/badge/OpenCode-6B7280?style=flat-square" alt="OpenCode">
+          <img src="https://img.shields.io/badge/n8n-EA4B71?logo=n8n&logoColor=white&style=flat-square" alt="n8n">
+          <img src="https://img.shields.io/badge/LangChain-1C3C3C?logo=langchain&logoColor=white&style=flat-square" alt="LangChain">
+          <img src="https://img.shields.io/badge/LangGraph-1C3C3C?style=flat-square" alt="LangGraph">
+          <img src="https://img.shields.io/badge/MCP-6B7280?style=flat-square" alt="MCP">
+          <img src="https://img.shields.io/badge/Prompt_Eng-6B7280?style=flat-square" alt="Prompt Eng">
+          <img src="https://img.shields.io/badge/Context_Eng-6B7280?style=flat-square" alt="Context Eng">
+          <img src="https://img.shields.io/badge/RAG-6B7280?style=flat-square" alt="RAG">
+        </div>
+      </div>
+
+      <div class="stack-group">
+        <h4 data-en="Languages &amp; Frameworks" data-cn="语言与框架"><svg class="ico"><use href="#i-brackets"/></svg> Languages &amp; Frameworks</h4>
+        <div class="stack-badges">
+          <img src="https://img.shields.io/badge/Java-ED8B00?logo=openjdk&logoColor=white&style=flat-square" alt="Java">
+          <img src="https://img.shields.io/badge/TypeScript-3178C6?logo=typescript&logoColor=white&style=flat-square" alt="TypeScript">
+          <img src="https://img.shields.io/badge/Python-3776AB?logo=python&logoColor=white&style=flat-square" alt="Python">
+          <img src="https://img.shields.io/badge/SQL-4479A1?logo=mysql&logoColor=white&style=flat-square" alt="SQL">
+          <img src="https://img.shields.io/badge/Shell-4EAA25?logo=gnubash&logoColor=white&style=flat-square" alt="Shell">
+          <img src="https://img.shields.io/badge/Spring_Boot-6DB33F?logo=springboot&logoColor=white&style=flat-square" alt="Spring Boot">
+          <img src="https://img.shields.io/badge/Spring_Cloud-6DB33F?logo=spring&logoColor=white&style=flat-square" alt="Spring Cloud">
+          <img src="https://img.shields.io/badge/MyBatis-6B7280?style=flat-square" alt="MyBatis">
+          <img src="https://img.shields.io/badge/Hibernate-59666C?logo=hibernate&logoColor=white&style=flat-square" alt="Hibernate">
+        </div>
+      </div>
+
+      <div class="stack-group">
+        <h4 data-en="Distributed &amp; Data" data-cn="分布式与数据"><svg class="ico"><use href="#i-blocks"/></svg> Distributed &amp; Data</h4>
+        <div class="stack-badges">
+          <img src="https://img.shields.io/badge/Microservices-6B7280?style=flat-square" alt="Microservices">
+          <img src="https://img.shields.io/badge/Redis-DC382D?logo=redis&logoColor=white&style=flat-square" alt="Redis">
+          <img src="https://img.shields.io/badge/Zookeeper-6B7280?style=flat-square" alt="Zookeeper">
+          <img src="https://img.shields.io/badge/Kafka-231F20?logo=apachekafka&logoColor=white&style=flat-square" alt="Kafka">
+          <img src="https://img.shields.io/badge/RabbitMQ-FF6600?logo=rabbitmq&logoColor=white&style=flat-square" alt="RabbitMQ">
+          <img src="https://img.shields.io/badge/Oracle-F80000?logo=oracle&logoColor=white&style=flat-square" alt="Oracle">
+          <img src="https://img.shields.io/badge/PostgreSQL-4169E1?logo=postgresql&logoColor=white&style=flat-square" alt="PostgreSQL">
+          <img src="https://img.shields.io/badge/MySQL-4479A1?logo=mysql&logoColor=white&style=flat-square" alt="MySQL">
+          <img src="https://img.shields.io/badge/OpenSearch-005EB8?logo=opensearch&logoColor=white&style=flat-square" alt="OpenSearch">
+        </div>
+      </div>
+
+      <div class="stack-group">
+        <h4 data-en="DevOps / Observability" data-cn="DevOps / 可观测性"><svg class="ico"><use href="#i-monitor"/></svg> DevOps / Observability</h4>
+        <div class="stack-badges">
+          <img src="https://img.shields.io/badge/Docker-2496ED?logo=docker&logoColor=white&style=flat-square" alt="Docker">
+          <img src="https://img.shields.io/badge/K8s-326CE5?logo=kubernetes&logoColor=white&style=flat-square" alt="K8s">
+          <img src="https://img.shields.io/badge/CI%2FCD-6B7280?style=flat-square" alt="CI/CD">
+          <img src="https://img.shields.io/badge/Prometheus-E6522C?logo=prometheus&logoColor=white&style=flat-square" alt="Prometheus">
+          <img src="https://img.shields.io/badge/Grafana-F46800?logo=grafana&logoColor=white&style=flat-square" alt="Grafana">
+          <img src="https://img.shields.io/badge/Mimir-6B7280?style=flat-square" alt="Mimir">
+          <img src="https://img.shields.io/badge/OpenTelemetry-000000?logo=opentelemetry&logoColor=white&style=flat-square" alt="OpenTelemetry">
+          <img src="https://img.shields.io/badge/Splunk-65A637?logo=splunk&logoColor=white&style=flat-square" alt="Splunk">
+          <img src="https://img.shields.io/badge/Tempo-6B7280?style=flat-square" alt="Tempo">
+        </div>
+      </div>
+    </section>
+
+    <!-- CONTACT -->
+    <section id="contact">
+      <div class="sec-title"><span data-en="Say Hi" data-cn="来唠两句">Say Hi</span> <small data-en="I don't bite (unless you're a flaky test)" data-cn="我不咬人（除非你是 flaky 测试）">I don't bite (unless you're a flaky test)</small></div>
+      <div class="contact">
+        <a href="https://github.com/chingjustwe" target="_blank"><svg class="ico"><use href="#i-github"/></svg> GitHub</a>
+        <a href="https://chingjustwe.github.io/" target="_blank"><svg class="ico"><use href="#i-pen"/></svg> Blog</a>
+        <a href="https://www.linkedin.com/in/rocky-chi-302633103/" target="_blank"><svg class="ico"><use href="#i-linkedin"/></svg> LinkedIn</a>
+        <a href="mailto:chingjustwe@live.com"><svg class="ico"><use href="#i-mail"/></svg> chingjustwe@live.com</a>
+        <a style="cursor:default"><svg class="ico"><use href="#i-pin"/></svg> Hangzhou</a>
+      </div>
+    </section>
+
+    <footer data-en="© 2026 Rocky Chi · Built with too much coffee and a stubborn SVG." data-cn="© 2026 池忠强 · 用太多咖啡和一个倔强的 SVG 建成。">
+      © 2026 Rocky Chi · Built with too much coffee and a stubborn SVG.
+    </footer>
+  </div>
+
+<script>
+  let lang = localStorage.getItem('lang') || 'en';
+
+  const scenes = [
+    { en: 'Debugging at the office. Same desk, different bugs.', cn: '在公司 debug。同一张桌子，不同的 bug。' },
+    { en: 'Debugging in Hyrule — bugs are just Bokoblins.', cn: '在海拉鲁 debug——bug 不过是 Bokoblin。' },
+    { en: 'Behind the walls. The real titan is legacy code.', cn: '城墙之内。真正的巨人是祖传代码。' },
+    { en: 'Courtside debugging. I alley-oop features, teammates dunk.', cn: '场边 debug。我空接功能，队友扣篮。' },
+    { en: 'At the boss pit. Pushing code like pushing lanes.', cn: '河道主宰旁。推代码就像推兵线。' },
+    { en: 'On the Sunny. My code is the One Piece.', cn: '阳光号上。我的代码就是 One Piece。' },
+    { en: 'Blue butterflies, a blue moon, and bugs that just won\'t beach off.', cn: '蓝蝴蝶、蓝月亮，还有不肯 beach off 的 bug。' }
+  ];
+
+  let currentScene = 0;
+  let sceneTimer = null;
+  const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  const sceneImgs = document.querySelectorAll('.scene-stage img.scene-bg');
+  const sceneDots = document.querySelectorAll('.scene-dots button');
+  const sceneCaption = document.getElementById('sceneCaption');
+
+  function showScene(i) {
+    sceneImgs.forEach((img, idx) => img.classList.toggle('active', idx === i));
+    sceneDots.forEach((dot, idx) => dot.classList.toggle('active', idx === i));
+    currentScene = i;
+    updateCaption();
+  }
+
+  function nextScene() { showScene((currentScene + 1) % scenes.length); }
+
+  function startRotation() {
+    if (reducedMotion) return;
+    stopRotation();
+    sceneTimer = setInterval(nextScene, 4500);
+  }
+
+  function stopRotation() {
+    if (sceneTimer) { clearInterval(sceneTimer); sceneTimer = null; }
+  }
+
+  function updateCaption() {
+    const cap = scenes[currentScene];
+    sceneCaption.textContent = (lang === 'cn') ? cap.cn : cap.en;
+  }
+
+  function toggleLang() {
+    lang = lang === 'en' ? 'cn' : 'en';
+    localStorage.setItem('lang', lang);
+    document.querySelectorAll('[data-en]').forEach(el => {
+      el.innerHTML = el.getAttribute('data-' + lang);
+    });
+    const btn = document.getElementById('langBtn');
+    btn.innerHTML = lang === 'en'
+      ? '<svg class="ico"><use href="#i-globe"></use></svg> 中文'
+      : '<svg class="ico"><use href="#i-globe"></use></svg> EN';
+    updateCaption();
+  }
+
+  // Init scene rotation
+  sceneDots.forEach((dot, i) => dot.addEventListener('click', () => { showScene(i); startRotation(); }));
+  showScene(0);
+  startRotation();
+
+  const stage = document.getElementById('sceneStage');
+  stage.addEventListener('mouseenter', stopRotation);
+  stage.addEventListener('mouseleave', startRotation);
+
+  // Apply saved language preference on load
+  if (lang === 'cn') {
+    document.querySelectorAll('[data-en]').forEach(el => { el.innerHTML = el.getAttribute('data-cn'); });
+    const btn = document.getElementById('langBtn');
+    if (btn) btn.innerHTML = '<svg class="ico"><use href="#i-globe"></use></svg> EN';
+  }
+  updateCaption();
+</script>
+</body>
+</html>

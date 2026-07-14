@@ -1,0 +1,751 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1"/>
+<title>Rocky Chi · 池忠强 — Homepage</title>
+<meta name="canvas:aspect-ratio" content="16:9"/>
+<style>
+/* ── tokens (Climate Tech · Dark) ─────────────────────────────── */
+:root{
+  --bg:#111d18;--surface:#182b24;--fg:#dce5dc;--muted:#7b8f82;
+  --border:rgba(255,255,255,.08);--accent:#f2a900;
+  --ocean:#1f6f8b;--accent-soft:color-mix(in oklch,var(--accent) 14%,transparent);
+  --ocean-soft:color-mix(in oklch,var(--ocean) 18%,transparent);
+  --fg-soft:color-mix(in oklch,var(--fg) 6%,transparent);
+  --seed-bg:var(--bg);--seed-fg:var(--fg);--seed-primary:var(--accent);
+  --seed-accent:var(--ocean);--seed-surface:var(--surface);--seed-radius:12px;
+
+  --font-display:'Source Sans 3',-apple-system,BlinkMacSystemFont,'Segoe UI','PingFang SC','Microsoft YaHei',system-ui,sans-serif;
+  --font-body:'Source Sans 3',-apple-system,BlinkMacSystemFont,'Segoe UI','PingFang SC','Microsoft YaHei',system-ui,sans-serif;
+  --font-mono:ui-monospace,'JetBrains Mono','SF Mono',Menlo,monospace;
+
+  --fs-h1:clamp(40px,6vw,64px);--fs-h2:clamp(28px,4vw,42px);--fs-h3:20px;
+  --fs-lead:18px;--fs-body:16px;--fs-meta:13px;--fs-caption:12px;
+
+  --gap-xs:8px;--gap-sm:12px;--gap-md:20px;--gap-lg:32px;--gap-xl:56px;--gap-2xl:96px;
+  --container:960px;--gutter:32px;
+  --radius:var(--seed-radius);--radius-lg:16px;
+}
+
+/* ── reset ────────────────────────────────────────────────────── */
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth;-webkit-text-size-adjust:100%}
+body{background:var(--bg);color:var(--fg);font-family:var(--font-body);font-size:var(--fs-body);line-height:1.55;text-rendering:optimizeLegibility;-webkit-font-smoothing:antialiased}
+img,svg{display:block;max-width:100%}
+a{color:inherit;text-decoration:none}
+button{font:inherit;cursor:pointer;border:none;background:none}
+p{text-wrap:pretty}h1,h2,h3,h4{text-wrap:balance}
+
+/* ── layout ───────────────────────────────────────────────────── */
+.container{max-width:var(--container);margin-inline:auto;padding-inline:var(--gutter)}
+.section{padding-block:clamp(56px,10vw,var(--gap-2xl))}
+.section+.section{border-top:1px solid var(--border)}
+.stack{display:flex;flex-direction:column}.stack>*+*{margin-top:var(--gap-md)}
+.row{display:flex;align-items:center;gap:var(--gap-md);flex-wrap:wrap}
+.row-between{display:flex;align-items:center;justify-content:space-between;gap:var(--gap-md)}
+.grid-2{display:grid;grid-template-columns:repeat(2,1fr);gap:var(--gap-lg)}
+.grid-3{display:grid;grid-template-columns:repeat(3,1fr);gap:var(--gap-lg)}
+@media(max-width:920px){.grid-2,.grid-3{grid-template-columns:1fr}}
+
+/* ── type ─────────────────────────────────────────────────────── */
+h1{font-family:var(--font-display);font-size:var(--fs-h1);line-height:1.05;letter-spacing:-.025em;font-weight:600}
+h2{font-family:var(--font-display);font-size:var(--fs-h2);line-height:1.1;letter-spacing:-.015em;font-weight:600}
+h3{font-size:var(--fs-h3);font-weight:600;line-height:1.3;letter-spacing:-.005em}
+.lead{font-size:var(--fs-lead);line-height:1.55;color:var(--muted);max-width:60ch}
+.eyebrow{font-family:var(--font-mono);font-size:var(--fs-caption);letter-spacing:.08em;text-transform:uppercase;color:var(--accent)}
+.meta{font-family:var(--font-mono);font-size:var(--fs-meta);color:var(--muted)}
+
+/* ── nav ──────────────────────────────────────────────────────── */
+.topnav{position:sticky;top:0;z-index:10;background:color-mix(in oklch,var(--bg) 88%,transparent);backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px);border-bottom:1px solid var(--border)}
+.topnav-inner{display:flex;align-items:center;justify-content:space-between;padding-block:14px}
+.topnav .logo{font-family:var(--font-display);font-size:18px;font-weight:600;letter-spacing:-.01em}
+.topnav .logo span{color:var(--accent)}
+.topnav nav{display:flex;gap:var(--gap-lg)}
+.topnav nav a{font-size:14px;color:var(--muted);transition:color .15s}
+.topnav nav a:hover,.topnav nav a.active{color:var(--fg)}
+.lang-btn{font-family:var(--font-mono);font-size:var(--fs-meta);color:var(--muted);border:1px solid var(--border);border-radius:6px;padding:4px 10px;transition:border-color .15s,color .15s}
+.lang-btn:hover{border-color:var(--fg);color:var(--fg)}
+
+/* ── buttons ──────────────────────────────────────────────────── */
+.btn{display:inline-flex;align-items:center;gap:8px;padding:11px 22px;border-radius:var(--radius);border:1px solid transparent;font-size:15px;font-weight:500;letter-spacing:.02em;transition:transform .05s ease,background .15s ease,border-color .15s ease}
+.btn:active{transform:translateY(1px)}
+.btn-primary{background:var(--accent);color:#111d18;border-color:var(--accent)}
+.btn-primary:hover{background:#d99800}
+.btn-secondary{background:transparent;color:var(--fg);border-color:var(--border)}
+.btn-secondary:hover{border-color:var(--fg)}
+.btn-arrow::after{content:'→';transition:transform .15s ease}
+.btn-arrow:hover::after{transform:translateX(3px)}
+
+/* ── hero ─────────────────────────────────────────────────────── */
+.hero{padding-block:clamp(64px,10vw,120px);position:relative;overflow:hidden}
+.hero::before{content:'';position:absolute;top:-120px;right:-80px;width:500px;height:500px;border-radius:50%;background:radial-gradient(circle,color-mix(in oklch,var(--ocean) 12%,transparent),transparent 70%);pointer-events:none}
+.hero::after{content:'';position:absolute;bottom:-100px;left:-60px;width:400px;height:400px;border-radius:50%;background:radial-gradient(circle,color-mix(in oklch,var(--accent) 8%,transparent),transparent 70%);pointer-events:none}
+.hero-split{display:grid;grid-template-columns:auto 1fr;gap:var(--gap-xl);align-items:center}
+@media(max-width:720px){.hero-split{grid-template-columns:1fr;text-align:center}.hero-info .chips,.hero-cta{justify-content:center}}
+
+/* ── avatar ───────────────────────────────────────────────────── */
+.avatar-wrap{width:220px;height:220px;position:relative;flex-shrink:0}
+.avatar-wrap svg{width:100%;height:100%}
+.avatar-dots{display:flex;gap:6px;justify-content:center;margin-top:10px}
+.avatar-dots span{width:6px;height:6px;border-radius:50%;background:var(--border);transition:background .4s}
+.avatar-dots span.on{background:var(--accent)}
+@keyframes sceneCycle{0%,20%{opacity:1}25%,95%{opacity:0}100%{opacity:1}}
+.scene-a{animation:sceneCycle 20s infinite 0s}
+.scene-b{opacity:0;animation:sceneCycle 20s infinite 5s}
+.scene-c{opacity:0;animation:sceneCycle 20s infinite 10s}
+.scene-d{opacity:0;animation:sceneCycle 20s infinite 15s}
+
+/* ── chips ────────────────────────────────────────────────────── */
+.chips{display:flex;flex-wrap:wrap;gap:8px;margin-top:var(--gap-md)}
+.chip{display:inline-flex;align-items:center;gap:5px;padding:5px 12px;border-radius:999px;font-size:13px;font-weight:500;background:var(--accent-soft);color:var(--accent);border:1px solid color-mix(in oklch,var(--accent) 20%,transparent);transition:transform .1s}
+.chip:hover{transform:scale(1.04)}
+.chip-ocean{background:var(--ocean-soft);color:var(--ocean);border-color:color-mix(in oklch,var(--ocean) 25%,transparent)}
+.chip-muted{background:var(--fg-soft);color:var(--muted);border-color:var(--border)}
+.chip svg{width:14px;height:14px}
+
+/* ── project cards ────────────────────────────────────────────── */
+.project-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:var(--gap-lg)}
+.card{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius-lg);overflow:hidden;transition:border-color .2s,transform .2s}
+.card:hover{border-color:color-mix(in oklch,var(--accent) 40%,transparent);transform:translateY(-3px)}
+.card-art{height:140px;overflow:hidden;background:var(--bg)}
+.card-art svg{width:100%;height:100%}
+.card-body{padding:20px 22px 24px}
+.card-body h3{margin-bottom:6px;display:flex;align-items:center;gap:8px}
+.card-body h3 svg{width:18px;height:18px;color:var(--ocean)}
+.card-body p{color:var(--muted);font-size:14px;line-height:1.5;margin-bottom:14px}
+.card-tags{display:flex;flex-wrap:wrap;gap:5px}
+.card-tags .tag{font-size:11px;padding:3px 8px;border-radius:999px;border:1px solid var(--border);color:var(--muted);font-family:var(--font-mono)}
+.card-link{display:inline-flex;align-items:center;gap:4px;font-size:13px;color:var(--ocean);margin-top:12px;font-weight:500;transition:color .15s}
+.card-link:hover{color:var(--accent)}
+.card-link svg{width:14px;height:14px}
+
+/* ── tech stack ───────────────────────────────────────────────── */
+.stack-group{margin-bottom:var(--gap-lg)}
+.stack-group:last-child{margin-bottom:0}
+.stack-label{font-family:var(--font-mono);font-size:var(--fs-caption);letter-spacing:.08em;text-transform:uppercase;color:var(--ocean);margin-bottom:var(--gap-sm)}
+.stack-chips{display:flex;flex-wrap:wrap;gap:8px}
+.stack-chip{padding:6px 14px;border-radius:var(--radius);font-size:14px;font-weight:500;border:1px solid var(--border);color:var(--fg);background:var(--surface);transition:border-color .15s,transform .1s}
+.stack-chip:hover{border-color:var(--accent);transform:translateY(-1px)}
+.stack-chip.secondary{font-size:12px;color:var(--muted);background:transparent;padding:5px 11px}
+
+/* ── contact ──────────────────────────────────────────────────── */
+.contact-row{display:flex;flex-wrap:wrap;gap:var(--gap-md);justify-content:center}
+.contact-link{display:inline-flex;align-items:center;gap:8px;padding:12px 20px;border-radius:var(--radius);border:1px solid var(--border);color:var(--fg);font-size:14px;transition:border-color .2s,color .2s,background .2s}
+.contact-link:hover{border-color:var(--accent);color:var(--accent);background:var(--accent-soft)}
+.contact-link svg{width:16px;height:16px}
+
+/* ── footer ───────────────────────────────────────────────────── */
+.pagefoot{padding-block:var(--gap-lg);color:var(--muted);font-size:13px;border-top:1px solid var(--border);text-align:center}
+
+/* ── scroll reveal ────────────────────────────────────────────── */
+.reveal{opacity:0;transform:translateY(24px);transition:opacity .6s ease,transform .6s ease}
+.reveal.visible{opacity:1;transform:translateY(0)}
+
+/* ── responsive ───────────────────────────────────────────────── */
+@media(max-width:920px){
+  .topnav nav{display:none}
+  .hero{padding-block:clamp(48px,8vw,80px)}
+  .avatar-wrap{width:180px;height:180px;margin-inline:auto}
+}
+@media(max-width:520px){
+  :root{--gutter:20px}
+  .avatar-wrap{width:160px;height:160px}
+  .contact-row{flex-direction:column;align-items:stretch}
+}
+</style>
+</head>
+<body>
+
+<!-- ─── icon sprite ──────────────────────────────────────────────── -->
+<svg xmlns="http://www.w3.org/2000/svg" style="display:none">
+  <symbol id="i-globe" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"><circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3c2.5 2.8 4 6 4 9s-1.5 6.2-4 9c-2.5-2.8-4-6-4-9s1.5-6.2 4-9z"/></symbol>
+  <symbol id="i-code" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"><path d="M8 6l-6 6 6 6M16 6l6 6-6 6M14 4l-4 16"/></symbol>
+  <symbol id="i-shield" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"><path d="M12 3l8 3v6c0 5-3.5 8.5-8 9-4.5-.5-8-4-8-9V6l8-3z"/><path d="M9 12l2 2 4-4"/></symbol>
+  <symbol id="i-term" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"><rect x="3" y="4" width="18" height="16" rx="2"/><path d="M7 9l3 3-3 3M13 15h4"/></symbol>
+  <symbol id="i-robot" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"><rect x="5" y="8" width="14" height="11" rx="2"/><circle cx="9.5" cy="13" r="1.2"/><circle cx="14.5" cy="13" r="1.2"/><path d="M9 17h6M12 4v4M9 4h6"/></symbol>
+  <symbol id="i-palette" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"><path d="M12 3a9 9 0 100 18c1 0 1.5-.7 1.5-1.5 0-.4-.2-.8-.4-1.1-.3-.3-.4-.7-.4-1.1 0-.8.7-1.5 1.5-1.5H16a5 5 0 005-5c0-4.4-4-8-9-8z"/><circle cx="7.5" cy="11.5" r="1.2" fill="currentColor"/><circle cx="10" cy="7.5" r="1.2" fill="currentColor"/><circle cx="15" cy="7.5" r="1.2" fill="currentColor"/></symbol>
+  <symbol id="i-pin" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"><path d="M12 21s-7-5.5-7-11a7 7 0 1114 0c0 5.5-7 11-7 11z"/><circle cx="12" cy="10" r="2.5"/></symbol>
+  <symbol id="i-github" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C6.48 2 2 6.48 2 12c0 4.42 2.87 8.17 6.84 9.49.5.09.68-.22.68-.48v-1.7c-2.78.6-3.37-1.34-3.37-1.34-.46-1.16-1.11-1.47-1.11-1.47-.91-.62.07-.6.07-.6 1 .07 1.53 1.03 1.53 1.03.89 1.53 2.34 1.09 2.91.83.09-.65.35-1.09.63-1.34-2.22-.25-4.56-1.11-4.56-4.95 0-1.09.39-1.98 1.03-2.68-.1-.25-.45-1.27.1-2.64 0 0 .84-.27 2.75 1.02A9.56 9.56 0 0112 6.8c.85 0 1.7.11 2.5.33 1.91-1.29 2.75-1.02 2.75-1.02.55 1.37.2 2.39.1 2.64.64.7 1.03 1.59 1.03 2.68 0 3.84-2.34 4.7-4.57 4.94.36.31.68.92.68 1.85v2.75c0 .27.18.58.69.48A10.01 10.01 0 0022 12c0-5.52-4.48-10-10-10z"/></symbol>
+  <symbol id="i-mail" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="M3 7l9 6 9-6"/></symbol>
+  <symbol id="i-pen" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"><path d="M17 3l4 4L7 21H3v-4L17 3z"/></symbol>
+  <symbol id="i-monitor" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"><rect x="3" y="4" width="18" height="13" rx="2"/><path d="M8 21h8M12 17v4"/></symbol>
+  <symbol id="i-flame" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"><path d="M12 2c0 4-4 6-4 10a4 4 0 008 0c0-4-4-6-4-10z"/><path d="M12 18a2 2 0 002-2c0-2-2-3-2-5 0 2-2 3-2 5a2 2 0 002 2z"/></symbol>
+  <symbol id="i-note" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"><path d="M9 18V5l12-2v13"/><circle cx="6" cy="18" r="3"/><circle cx="18" cy="16" r="3"/></symbol>
+  <symbol id="i-blocks" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"><rect x="3" y="3" width="8" height="8" rx="1"/><rect x="13" y="3" width="8" height="8" rx="1"/><rect x="3" y="13" width="8" height="8" rx="1"/><rect x="13" y="13" width="8" height="8" rx="1"/></symbol>
+  <symbol id="i-spark" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"><path d="M12 2v4M12 18v4M4.93 4.93l2.83 2.83M16.24 16.24l2.83 2.83M2 12h4M18 12h4M4.93 19.07l2.83-2.83M16.24 7.76l2.83-2.83"/></symbol>
+  <symbol id="i-cup" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"><path d="M5 6h12v7a4 4 0 01-4 4H9a4 4 0 01-4-4V6z"/><path d="M17 8h2a2 2 0 010 4h-2M8 21h6M12 17v4"/></symbol>
+  <symbol id="i-external" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"><path d="M18 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h6M15 3h6v6M10 14L21 3"/></symbol>
+</svg>
+
+<!-- ─── nav ──────────────────────────────────────────────────────── -->
+<header class="topnav" data-od-id="nav" data-component="Navigation">
+  <div class="container topnav-inner">
+    <span class="logo">rocky<span>.</span>dev</span>
+    <nav aria-label="Main navigation">
+      <a href="#hero" data-en="About" data-cn="关于">About</a>
+      <a href="#projects" data-en="Projects" data-cn="项目">Projects</a>
+      <a href="#stack" data-en="Stack" data-cn="技术栈">Stack</a>
+      <a href="#contact" data-en="Contact" data-cn="联系">Contact</a>
+    </nav>
+    <button class="lang-btn" id="langBtn" onclick="toggleLang()" aria-label="Toggle language">
+      <svg style="display:inline;width:13px;height:13px;vertical-align:-1px;margin-right:3px"><use href="#i-globe"/></svg>中文
+    </button>
+  </div>
+</header>
+
+<main id="content">
+
+<!-- ─── hero ─────────────────────────────────────────────────────── -->
+<section class="section hero" id="hero" data-od-id="hero" data-component="Hero">
+  <div class="container hero-split">
+
+    <!-- animated avatar -->
+    <div>
+      <div class="avatar-wrap" role="img" aria-label="Animated avatar of Rocky Chi in four scenes">
+        <svg viewBox="0 0 220 220" xmlns="http://www.w3.org/2000/svg">
+          <!-- clip to rounded frame -->
+          <defs>
+            <clipPath id="avatar-clip"><rect x="10" y="10" width="200" height="200" rx="24"/></clipPath>
+          </defs>
+          <g clip-path="url(#avatar-clip)">
+
+            <!-- ── Scene A: Office ────────────────────────────── -->
+            <g class="scene-a">
+              <rect x="10" y="10" width="200" height="200" fill="#131e1a"/>
+              <!-- desk -->
+              <rect x="20" y="150" width="180" height="60" rx="3" fill="#1e352c"/>
+              <!-- monitor 1 -->
+              <rect x="30" y="80" width="60" height="45" rx="4" fill="#0d1613"/>
+              <rect x="34" y="84" width="52" height="32" rx="2" fill="#162e26"/>
+              <rect x="38" y="90" width="20" height="2" rx="1" fill="#2a8a6e" opacity=".7"/>
+              <rect x="38" y="95" width="32" height="2" rx="1" fill="#1f6f8b" opacity=".6"/>
+              <rect x="38" y="100" width="26" height="2" rx="1" fill="#f2a900" opacity=".5"/>
+              <rect x="38" y="105" width="18" height="2" rx="1" fill="#2a8a6e" opacity=".5"/>
+              <!-- monitor 2 -->
+              <rect x="125" y="85" width="55" height="40" rx="4" fill="#0d1613"/>
+              <rect x="129" y="89" width="47" height="28" rx="2" fill="#162e26"/>
+              <rect x="133" y="94" width="16" height="2" rx="1" fill="#1f6f8b" opacity=".6"/>
+              <rect x="133" y="99" width="28" height="2" rx="1" fill="#2a8a6e" opacity=".5"/>
+              <!-- server rack -->
+              <rect x="185" y="60" width="22" height="70" rx="3" fill="#1a2e27"/>
+              <circle cx="192" cy="72" r="2" fill="#2a8a6e" opacity=".6"/>
+              <circle cx="192" cy="80" r="2" fill="#f2a900" opacity=".5"/>
+              <circle cx="192" cy="88" r="2" fill="#2a8a6e" opacity=".6"/>
+              <!-- plant -->
+              <rect x="22" y="132" width="6" height="18" rx="1" fill="#3a5c4a"/>
+              <circle cx="25" cy="128" r="8" fill="#2a6b4e" opacity=".7"/>
+              <!-- character -->
+              <rect x="85" y="120" width="50" height="35" rx="6" fill="#2d4a3e"/>
+              <circle cx="110" cy="105" r="22" fill="#f0d0a0"/>
+              <path d="M88 98 Q90 82 110 80 Q130 82 132 98" fill="#2a2520"/>
+              <circle cx="102" cy="104" r="2.2" fill="#1a1612"/>
+              <circle cx="118" cy="104" r="2.2" fill="#1a1612"/>
+              <path d="M106 112 Q110 115 114 112" fill="none" stroke="#8a6a50" stroke-width="1.2"/>
+              <!-- headphones -->
+              <path d="M87 100 Q87 88 110 86 Q133 88 133 100" fill="none" stroke="#1f6f8b" stroke-width="2.5"/>
+              <rect x="83" y="96" width="6" height="10" rx="3" fill="#1f6f8b"/>
+              <rect x="131" y="96" width="6" height="10" rx="3" fill="#1f6f8b"/>
+            </g>
+
+            <!-- ── Scene B: Hyrule ────────────────────────────── -->
+            <g class="scene-b">
+              <rect x="10" y="10" width="200" height="200" fill="#1a2820"/>
+              <!-- sky gradient -->
+              <rect x="10" y="10" width="200" height="90" fill="#1e3a2e"/>
+              <!-- hills -->
+              <path d="M10 120 Q50 70 100 100 Q150 60 210 90 V210 H10Z" fill="#2a5c3e" opacity=".6"/>
+              <path d="M10 150 Q70 110 130 130 Q180 100 210 120 V210 H10Z" fill="#1e4a30" opacity=".7"/>
+              <!-- trees -->
+              <path d="M40 100 L45 80 L50 100Z" fill="#2a6b4e"/>
+              <rect x="44" y="100" width="3" height="8" fill="#4a3a2a"/>
+              <path d="M160 90 L166 68 L172 90Z" fill="#2a6b4e"/>
+              <rect x="165" y="90" width="3" height="8" fill="#4a3a2a"/>
+              <!-- signpost -->
+              <rect x="120" y="110" width="3" height="30" fill="#5a4a3a"/>
+              <rect x="112" y="108" width="20" height="10" rx="2" fill="#6a5a4a"/>
+              <!-- cloud -->
+              <ellipse cx="80" cy="40" rx="25" ry="10" fill="#2a4a3a" opacity=".5"/>
+              <!-- character -->
+              <rect x="80" y="140" width="50" height="35" rx="6" fill="#3a6a4a"/>
+              <circle cx="105" cy="125" r="22" fill="#f0d0a0"/>
+              <path d="M83 118 Q85 102 105 100 Q125 102 127 118" fill="#2a2520"/>
+              <circle cx="97" cy="124" r="2.2" fill="#1a1612"/>
+              <circle cx="113" cy="124" r="2.2" fill="#1a1612"/>
+              <path d="M101 132 Q105 135 109 132" fill="none" stroke="#8a6a50" stroke-width="1.2"/>
+            </g>
+
+            <!-- ── Scene C: Thousand Sunny ────────────────────── -->
+            <g class="scene-c">
+              <rect x="10" y="10" width="200" height="200" fill="#0f2030"/>
+              <!-- ocean -->
+              <path d="M10 130 Q50 120 100 130 Q150 140 210 125 V210 H10Z" fill="#163050" opacity=".7"/>
+              <path d="M10 150 Q60 140 120 150 Q170 158 210 145 V210 H10Z" fill="#122540" opacity=".8"/>
+              <!-- sun -->
+              <circle cx="160" cy="55" r="22" fill="#f2a900" opacity=".25"/>
+              <circle cx="160" cy="55" r="14" fill="#f2a900" opacity=".4"/>
+              <!-- rays -->
+              <line x1="160" y1="28" x2="160" y2="20" stroke="#f2a900" stroke-width="1.5" opacity=".3"/>
+              <line x1="180" y1="40" x2="186" y2="34" stroke="#f2a900" stroke-width="1.5" opacity=".3"/>
+              <line x1="188" y1="55" x2="195" y2="55" stroke="#f2a900" stroke-width="1.5" opacity=".3"/>
+              <!-- ship hull -->
+              <path d="M55 135 L65 155 L145 155 L155 135Z" fill="#5a3a20"/>
+              <path d="M65 155 L70 165 L140 165 L145 155Z" fill="#4a2a15"/>
+              <!-- mast -->
+              <rect x="103" y="70" width="3" height="65" fill="#6a5040"/>
+              <!-- sail -->
+              <path d="M106 75 L140 85 L106 110Z" fill="#e8dcc8" opacity=".85"/>
+              <!-- jolly roger -->
+              <circle cx="105" cy="68" r="6" fill="#2a1a10"/>
+              <circle cx="103" cy="67" r="1" fill="#e8dcc8"/>
+              <circle cx="107" cy="67" r="1" fill="#e8dcc8"/>
+              <!-- figurehead (lion/sunflower) -->
+              <circle cx="55" cy="130" r="8" fill="#f2a900" opacity=".6"/>
+              <!-- character -->
+              <rect x="80" y="118" width="40" height="22" rx="4" fill="#3a5a70"/>
+              <circle cx="100" cy="106" r="18" fill="#f0d0a0"/>
+              <path d="M82 100 Q84 86 100 84 Q116 86 118 100" fill="#2a2520"/>
+              <circle cx="94" cy="105" r="2" fill="#1a1612"/>
+              <circle cx="106" cy="105" r="2" fill="#1a1612"/>
+              <path d="M97 111 Q100 113 103 111" fill="none" stroke="#8a6a50" stroke-width="1"/>
+              <!-- straw hat -->
+              <ellipse cx="100" cy="90" rx="22" ry="5" fill="#d4a050"/>
+              <path d="M82 90 Q82 76 100 74 Q118 76 118 90" fill="#c89040"/>
+              <rect x="82" y="82" width="36" height="3" fill="#c0392b" opacity=".8"/>
+            </g>
+
+            <!-- ── Scene D: Music / 黑色柳丁 ─────────────────── -->
+            <g class="scene-d">
+              <rect x="10" y="10" width="200" height="200" fill="#161220"/>
+              <!-- stars -->
+              <circle cx="40" cy="30" r="1" fill="#f0d0a0" opacity=".4"/>
+              <circle cx="90" cy="25" r="1.2" fill="#f0d0a0" opacity=".5"/>
+              <circle cx="150" cy="40" r="1" fill="#f0d0a0" opacity=".3"/>
+              <circle cx="180" cy="28" r="0.8" fill="#f0d0a0" opacity=".4"/>
+              <circle cx="60" cy="55" r="0.8" fill="#f0d0a0" opacity=".35"/>
+              <!-- vinyl record 1 -->
+              <circle cx="55" cy="90" r="22" fill="#1a1a2a" stroke="#2a2a3a" stroke-width="1"/>
+              <circle cx="55" cy="90" r="16" fill="none" stroke="#2a2a3a" stroke-width=".5"/>
+              <circle cx="55" cy="90" r="10" fill="none" stroke="#2a2a3a" stroke-width=".5"/>
+              <circle cx="55" cy="90" r="5" fill="#f2a900" opacity=".5"/>
+              <!-- vinyl record 2 -->
+              <circle cx="170" cy="70" r="18" fill="#1a1a2a" stroke="#2a2a3a" stroke-width="1"/>
+              <circle cx="170" cy="70" r="12" fill="none" stroke="#2a2a3a" stroke-width=".5"/>
+              <circle cx="170" cy="70" r="4" fill="#1f6f8b" opacity=".5"/>
+              <!-- orange (柳丁) -->
+              <circle cx="165" cy="150" r="14" fill="#e67e22" opacity=".6"/>
+              <ellipse cx="165" cy="138" rx="3" ry="5" fill="#2a6b4e" opacity=".7" transform="rotate(-15 165 138)"/>
+              <!-- music notes -->
+              <g fill="#f2a900" opacity=".5">
+                <path d="M70 60 V45 L78 42 V57" fill="none" stroke="#f2a900" stroke-width="1.5"/>
+                <circle cx="68" cy="60" r="4"/>
+                <circle cx="76" cy="57" r="4"/>
+              </g>
+              <g opacity=".4">
+                <path d="M140 110 V98" fill="none" stroke="#f0d0a0" stroke-width="1.5"/>
+                <circle cx="138" cy="110" r="3.5" fill="#f0d0a0"/>
+              </g>
+              <!-- character -->
+              <rect x="85" y="135" width="45" height="30" rx="5" fill="#2a2040"/>
+              <circle cx="107" cy="120" r="20" fill="#f0d0a0"/>
+              <path d="M87 114 Q89 98 107 96 Q125 98 127 114" fill="#2a2520"/>
+              <circle cx="100" cy="119" r="2" fill="#1a1612"/>
+              <circle cx="114" cy="119" r="2" fill="#1a1612"/>
+              <path d="M104 126 Q107 128 110 126" fill="none" stroke="#8a6a50" stroke-width="1"/>
+              <!-- headphones -->
+              <path d="M86 115 Q86 103 107 101 Q128 103 128 115" fill="none" stroke="#7b5ea7" stroke-width="2.5"/>
+              <rect x="82" y="112" width="6" height="9" rx="3" fill="#7b5ea7"/>
+              <rect x="126" y="112" width="6" height="9" rx="3" fill="#7b5ea7"/>
+            </g>
+
+            <!-- frame border -->
+            <rect x="10" y="10" width="200" height="200" rx="24" fill="none" stroke="rgba(255,255,255,.08)" stroke-width="1.5"/>
+          </g>
+        </svg>
+      </div>
+      <div class="avatar-dots" id="avatarDots">
+        <span class="on"></span><span></span><span></span><span></span>
+      </div>
+    </div>
+
+    <!-- hero info -->
+    <div class="hero-info">
+      <p class="eyebrow" style="margin-bottom:14px" data-en="Java Architect · AI Agent Engineer" data-cn="Java 架构师 · AI Agent 工程师">Java Architect · AI Agent Engineer</p>
+      <h1 data-en="Rocky Chi 池忠强" data-cn="池忠强 Rocky Chi">Rocky Chi 池忠强</h1>
+      <p class="lead" style="margin-top:16px"
+         data-en="Building distributed monitoring platforms and AI Agent products for enterprise observability. Eight years turning complex systems into reliable, measurable tools."
+         data-cn="专注分布式监控平台与 AI Agent 产品，为企业可观测性打造可靠、可度量的工具。八年深耕后端架构与系统可观测性。">
+        Building distributed monitoring platforms and AI Agent products for enterprise observability. Eight years turning complex systems into reliable, measurable tools.
+      </p>
+      <div class="chips">
+        <span class="chip"><svg><use href="#i-flame"/></svg><span data-en="Open to cool stuff" data-cn="开放合作">Open to cool stuff</span></span>
+        <span class="chip chip-ocean"><svg><use href="#i-pin"/></svg><span data-en="Hangzhou" data-cn="杭州">Hangzhou</span></span>
+        <span class="chip chip-muted"><svg><use href="#i-cup"/></svg><span data-en="Coffee → Code" data-cn="咖啡 → 代码">Coffee → Code</span></span>
+      </div>
+      <div style="margin-top:28px">
+        <a class="btn btn-primary" href="https://chingjustwe.github.io/portfolio/" target="_blank" rel="noopener" data-en="View portfolio" data-cn="查看作品集">View portfolio</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ─── projects ─────────────────────────────────────────────────── -->
+<section class="section" id="projects" data-od-id="projects" data-component="Projects">
+  <div class="container">
+    <p class="eyebrow reveal" style="margin-bottom:10px" data-en="SELECTED WORK" data-cn="精选项目">SELECTED WORK</p>
+    <h2 class="reveal" style="margin-bottom:40px;max-width:28ch"
+        data-en="Things I've built and shipped."
+        data-cn="我做过的一些事情。">Things I've built and shipped.</h2>
+
+    <div class="project-grid">
+
+      <!-- LLM Interceptor -->
+      <article class="card reveal" data-component="Project Card">
+        <div class="card-art">
+          <svg viewBox="0 0 400 140" xmlns="http://www.w3.org/2000/svg">
+            <rect width="400" height="140" fill="#0f1a16"/>
+            <rect x="20" y="30" width="80" height="80" rx="8" fill="#182b24" stroke="rgba(31,111,139,.3)" stroke-width="1"/>
+            <path d="M50 55 L60 45 L70 55 L60 65Z" fill="none" stroke="#1f6f8b" stroke-width="1.5"/>
+            <circle cx="60" cy="55" r="4" fill="#1f6f8b" opacity=".6"/>
+            <text x="36" y="95" font-family="ui-monospace,monospace" font-size="8" fill="#7b8f82">FIREWALL</text>
+            <!-- data flow -->
+            <line x1="110" y1="70" x2="160" y2="70" stroke="#1f6f8b" stroke-width="1" stroke-dasharray="4 3" opacity=".5"/>
+            <rect x="170" y="40" width="90" height="60" rx="6" fill="#182b24" stroke="rgba(242,169,0,.2)" stroke-width="1"/>
+            <rect x="182" y="52" width="40" height="3" rx="1" fill="#2a8a6e" opacity=".5"/>
+            <rect x="182" y="60" width="55" height="3" rx="1" fill="#1f6f8b" opacity=".4"/>
+            <rect x="182" y="68" width="30" height="3" rx="1" fill="#f2a900" opacity=".4"/>
+            <rect x="182" y="80" width="50" height="12" rx="2" fill="rgba(242,169,0,.1)"/>
+            <text x="192" y="89" font-family="ui-monospace,monospace" font-size="7" fill="#f2a900" opacity=".7">ALLOWED</text>
+            <line x1="270" y1="70" x2="310" y2="70" stroke="#2a8a6e" stroke-width="1" stroke-dasharray="4 3" opacity=".4"/>
+            <rect x="320" y="45" width="60" height="50" rx="6" fill="#182b24" stroke="rgba(42,138,110,.2)" stroke-width="1"/>
+            <text x="332" y="65" font-family="ui-monospace,monospace" font-size="7" fill="#7b8f82">LLM API</text>
+            <rect x="335" y="72" width="30" height="8" rx="2" fill="rgba(42,138,110,.15)"/>
+            <circle cx="350" cy="76" r="2.5" fill="#2a8a6e" opacity=".6"/>
+          </svg>
+        </div>
+        <div class="card-body">
+          <h3><svg><use href="#i-shield"/></svg>LLM Interceptor</h3>
+          <p data-en="Smart LLM proxy &amp; firewall — filter, audit, and govern AI traffic before it reaches the model." data-cn="智能 LLM 代理与防火墙 — 在请求到达模型之前过滤、审计和管控 AI 流量。">Smart LLM proxy &amp; firewall — filter, audit, and govern AI traffic before it reaches the model.</p>
+          <div class="card-tags"><span class="tag">Java</span><span class="tag">Proxy</span><span class="tag">Guardrails</span></div>
+          <a class="card-link" href="https://chingjustwe.github.io/llm-interceptor/" target="_blank" rel="noopener">
+            <span data-en="Live demo" data-cn="在线演示">Live demo</span> <svg><use href="#i-external"/></svg>
+          </a>
+        </div>
+      </article>
+
+      <!-- CodeCode -->
+      <article class="card reveal" data-component="Project Card">
+        <div class="card-art">
+          <svg viewBox="0 0 400 140" xmlns="http://www.w3.org/2000/svg">
+            <rect width="400" height="140" fill="#0d1613"/>
+            <!-- terminal window -->
+            <rect x="40" y="15" width="320" height="110" rx="8" fill="#111a16" stroke="rgba(255,255,255,.06)" stroke-width="1"/>
+            <!-- title bar -->
+            <rect x="40" y="15" width="320" height="22" rx="8" fill="#182520"/>
+            <circle cx="58" cy="26" r="4" fill="#e06060" opacity=".7"/>
+            <circle cx="72" cy="26" r="4" fill="#f2a900" opacity=".7"/>
+            <circle cx="86" cy="26" r="4" fill="#2a8a6e" opacity=".7"/>
+            <text x="160" y="29" font-family="ui-monospace,monospace" font-size="9" fill="#7b8f82" text-anchor="middle">zsh — codecode</text>
+            <!-- terminal content -->
+            <text x="55" y="55" font-family="ui-monospace,monospace" font-size="11" fill="#2a8a6e">$ code run hello.py</text>
+            <text x="55" y="72" font-family="ui-monospace,monospace" font-size="10" fill="#7b8f82">Compiling 3 modules...</text>
+            <text x="55" y="87" font-family="ui-monospace,monospace" font-size="10" fill="#f2a900" opacity=".8">✓ Built in 0.4s</text>
+            <text x="55" y="102" font-family="ui-monospace,monospace" font-size="10" fill="#dce5dc" opacity=".7">Hello, observability!</text>
+            <text x="55" y="117" font-family="ui-monospace,monospace" font-size="11" fill="#2a8a6e">$ _</text>
+          </svg>
+        </div>
+        <div class="card-body">
+          <h3><svg><use href="#i-term"/></svg>CodeCode</h3>
+          <p data-en="Lightweight online IDE for quick prototyping — write, run, and share code snippets in the browser." data-cn="轻量级在线 IDE，快速原型开发 — 在浏览器中编写、运行和分享代码片段。">Lightweight online IDE for quick prototyping — write, run, and share code snippets in the browser.</p>
+          <div class="card-tags"><span class="tag">TypeScript</span><span class="tag">WebIDE</span><span class="tag">Sandbox</span></div>
+          <a class="card-link" href="https://chingjustwe.github.io/codecode/" target="_blank" rel="noopener">
+            <span data-en="Open editor" data-cn="打开编辑器">Open editor</span> <svg><use href="#i-external"/></svg>
+          </a>
+        </div>
+      </article>
+
+      <!-- Agent Forge -->
+      <article class="card reveal" data-component="Project Card">
+        <div class="card-art">
+          <svg viewBox="0 0 400 140" xmlns="http://www.w3.org/2000/svg">
+            <rect width="400" height="140" fill="#11151e"/>
+            <!-- pipeline boxes -->
+            <rect x="15" y="45" width="70" height="50" rx="6" fill="#182030" stroke="rgba(31,111,139,.3)" stroke-width="1"/>
+            <text x="30" y="67" font-family="ui-monospace,monospace" font-size="8" fill="#1f6f8b">Gateway</text>
+            <text x="28" y="80" font-family="ui-monospace,monospace" font-size="7" fill="#7b8f82">route/auth</text>
+
+            <line x1="90" y1="70" x2="115" y2="70" stroke="#1f6f8b" stroke-width="1" stroke-dasharray="3 2" opacity=".5"/>
+            <circle cx="102" cy="70" r="2" fill="#1f6f8b" opacity=".6"/>
+
+            <rect x="120" y="45" width="70" height="50" rx="6" fill="#182030" stroke="rgba(242,169,0,.2)" stroke-width="1"/>
+            <text x="133" y="67" font-family="ui-monospace,monospace" font-size="8" fill="#f2a900">Harness</text>
+            <text x="130" y="80" font-family="ui-monospace,monospace" font-size="7" fill="#7b8f82">orchestrate</text>
+
+            <line x1="195" y1="70" x2="220" y2="70" stroke="#f2a900" stroke-width="1" stroke-dasharray="3 2" opacity=".4"/>
+            <circle cx="207" cy="70" r="2" fill="#f2a900" opacity=".5"/>
+
+            <rect x="225" y="45" width="70" height="50" rx="6" fill="#182030" stroke="rgba(42,138,110,.3)" stroke-width="1"/>
+            <text x="238" y="67" font-family="ui-monospace,monospace" font-size="8" fill="#2a8a6e">Runtime</text>
+            <text x="236" y="80" font-family="ui-monospace,monospace" font-size="7" fill="#7b8f82">execute</text>
+
+            <line x1="300" y1="70" x2="325" y2="70" stroke="#2a8a6e" stroke-width="1" stroke-dasharray="3 2" opacity=".4"/>
+            <circle cx="312" cy="70" r="2" fill="#2a8a6e" opacity=".5"/>
+
+            <rect x="330" y="45" width="55" height="50" rx="6" fill="#182030" stroke="rgba(255,255,255,.06)" stroke-width="1"/>
+            <text x="340" y="67" font-family="ui-monospace,monospace" font-size="8" fill="#7b8f82">LLM</text>
+            <text x="340" y="80" font-family="ui-monospace,monospace" font-size="7" fill="#7b8f82">API</text>
+
+            <!-- OpenTelemetry bar -->
+            <rect x="15" y="108" width="370" height="14" rx="3" fill="#182030" stroke="rgba(255,255,255,.04)" stroke-width="1"/>
+            <text x="25" y="118" font-family="ui-monospace,monospace" font-size="7" fill="#7b8f82">OTEL</text>
+            <rect x="60" y="112" width="80" height="6" rx="2" fill="rgba(31,111,139,.2)"/>
+            <rect x="60" y="112" width="40" height="6" rx="2" fill="#1f6f8b" opacity=".4"/>
+          </svg>
+        </div>
+        <div class="card-body">
+          <h3><svg><use href="#i-robot"/></svg>Agent Forge</h3>
+          <p data-en="Enterprise AI Agent platform — design, deploy, and observe autonomous agent workflows at scale." data-cn="企业 AI Agent 平台 — 设计、部署和观测大规模自主 Agent 工作流。">Enterprise AI Agent platform — design, deploy, and observe autonomous agent workflows at scale.</p>
+          <div class="card-tags"><span class="tag">LangChain</span><span class="tag">MCP</span><span class="tag">OpenTelemetry</span></div>
+          <a class="card-link" href="https://chingjustwe.github.io/agent-forge/" target="_blank" rel="noopener">
+            <span data-en="Explore" data-cn="了解更多">Explore</span> <svg><use href="#i-external"/></svg>
+          </a>
+        </div>
+      </article>
+
+      <!-- Portfolio -->
+      <article class="card reveal" data-component="Project Card">
+        <div class="card-art">
+          <svg viewBox="0 0 400 140" xmlns="http://www.w3.org/2000/svg">
+            <rect width="400" height="140" fill="#12181e"/>
+            <!-- browser mockup -->
+            <rect x="50" y="15" width="300" height="110" rx="8" fill="#182520" stroke="rgba(255,255,255,.06)" stroke-width="1"/>
+            <rect x="50" y="15" width="300" height="18" rx="8" fill="#1a2e27"/>
+            <circle cx="66" cy="24" r="3" fill="#e06060" opacity=".5"/>
+            <circle cx="78" cy="24" r="3" fill="#f2a900" opacity=".5"/>
+            <circle cx="90" cy="24" r="3" fill="#2a8a6e" opacity=".5"/>
+            <rect x="130" y="19" width="140" height="10" rx="4" fill="#111a16"/>
+            <!-- content grid -->
+            <rect x="65" y="42" width="85" height="55" rx="4" fill="#1e352c" opacity=".5"/>
+            <rect x="65" y="42" width="85" height="30" rx="4" fill="rgba(31,111,139,.15)"/>
+            <rect x="72" y="78" width="40" height="3" rx="1" fill="#7b8f82" opacity=".5"/>
+            <rect x="72" y="85" width="55" height="3" rx="1" fill="#7b8f82" opacity=".3"/>
+
+            <rect x="160" y="42" width="85" height="55" rx="4" fill="#1e352c" opacity=".5"/>
+            <rect x="160" y="42" width="85" height="30" rx="4" fill="rgba(242,169,0,.1)"/>
+            <rect x="167" y="78" width="35" height="3" rx="1" fill="#7b8f82" opacity=".5"/>
+            <rect x="167" y="85" width="50" height="3" rx="1" fill="#7b8f82" opacity=".3"/>
+
+            <rect x="255" y="42" width="85" height="55" rx="4" fill="#1e352c" opacity=".5"/>
+            <rect x="255" y="42" width="85" height="30" rx="4" fill="rgba(42,138,110,.12)"/>
+            <rect x="262" y="78" width="45" height="3" rx="1" fill="#7b8f82" opacity=".5"/>
+            <rect x="262" y="85" width="38" height="3" rx="1" fill="#7b8f82" opacity=".3"/>
+
+            <rect x="65" y="106" width="275" height="10" rx="3" fill="rgba(255,255,255,.03)"/>
+          </svg>
+        </div>
+        <div class="card-body">
+          <h3><svg><use href="#i-palette"/></svg>Portfolio</h3>
+          <p data-en="Interactive showcase of design and engineering work — case studies, experiments, and visual demos." data-cn="设计与工程作品展示 — 案例研究、实验项目和可视化演示。">Interactive showcase of design and engineering work — case studies, experiments, and visual demos.</p>
+          <div class="card-tags"><span class="tag">HTML</span><span class="tag">SVG</span><span class="tag">Design</span></div>
+          <a class="card-link" href="https://chingjustwe.github.io/portfolio/" target="_blank" rel="noopener">
+            <span data-en="Browse work" data-cn="浏览作品">Browse work</span> <svg><use href="#i-external"/></svg>
+          </a>
+        </div>
+      </article>
+
+      <!-- Blog -->
+      <article class="card reveal" data-component="Project Card">
+        <div class="card-art">
+          <svg viewBox="0 0 400 140" xmlns="http://www.w3.org/2000/svg">
+            <rect width="400" height="140" fill="#14161e"/>
+            <!-- open book -->
+            <path d="M200 30 Q160 35 120 40 L120 115 Q160 110 200 105" fill="#1a2230" stroke="rgba(255,255,255,.06)" stroke-width="1"/>
+            <path d="M200 30 Q240 35 280 40 L280 115 Q240 110 200 105" fill="#1e2838" stroke="rgba(255,255,255,.06)" stroke-width="1"/>
+            <!-- left page lines -->
+            <rect x="135" y="52" width="50" height="2.5" rx="1" fill="#7b8f82" opacity=".3"/>
+            <rect x="135" y="60" width="55" height="2.5" rx="1" fill="#7b8f82" opacity=".25"/>
+            <rect x="135" y="68" width="40" height="2.5" rx="1" fill="#7b8f82" opacity=".2"/>
+            <rect x="135" y="76" width="48" height="2.5" rx="1" fill="#f2a900" opacity=".25"/>
+            <rect x="135" y="84" width="52" height="2.5" rx="1" fill="#7b8f82" opacity=".2"/>
+            <rect x="135" y="92" width="35" height="2.5" rx="1" fill="#7b8f82" opacity=".15"/>
+            <!-- right page lines -->
+            <rect x="215" y="52" width="48" height="2.5" rx="1" fill="#7b8f82" opacity=".3"/>
+            <rect x="215" y="60" width="52" height="2.5" rx="1" fill="#7b8f82" opacity=".25"/>
+            <rect x="215" y="68" width="38" height="2.5" rx="1" fill="#1f6f8b" opacity=".25"/>
+            <rect x="215" y="76" width="50" height="2.5" rx="1" fill="#7b8f82" opacity=".2"/>
+            <rect x="215" y="84" width="45" height="2.5" rx="1" fill="#7b8f82" opacity=".2"/>
+            <!-- spine -->
+            <line x1="200" y1="30" x2="200" y2="105" stroke="rgba(255,255,255,.06)" stroke-width="1"/>
+            <!-- pen -->
+            <line x1="300" y1="50" x2="320" y2="100" stroke="#f2a900" stroke-width="2" opacity=".4"/>
+            <path d="M320 100 L322 108 L318 106Z" fill="#f2a900" opacity=".4"/>
+          </svg>
+        </div>
+        <div class="card-body">
+          <h3><svg><use href="#i-pen"/></svg>Blog</h3>
+          <p data-en="Thoughts on distributed systems, AI engineering, observability, and the craft of building reliable software." data-cn="关于分布式系统、AI 工程、可观测性以及构建可靠软件的技术思考。">Thoughts on distributed systems, AI engineering, observability, and the craft of building reliable software.</p>
+          <div class="card-tags"><span class="tag">Tech</span><span class="tag">Architecture</span><span class="tag">AIOps</span></div>
+          <a class="card-link" href="https://chingjustwe.github.io/" target="_blank" rel="noopener">
+            <span data-en="Read posts" data-cn="阅读文章">Read posts</span> <svg><use href="#i-external"/></svg>
+          </a>
+        </div>
+      </article>
+
+    </div>
+  </div>
+</section>
+
+<!-- ─── tech stack ───────────────────────────────────────────────── -->
+<section class="section" id="stack" data-od-id="stack" data-component="Tech Stack">
+  <div class="container">
+    <p class="eyebrow reveal" style="margin-bottom:10px" data-en="TOOLS &amp; TECHNOLOGIES" data-cn="工具与技术">TOOLS &amp; TECHNOLOGIES</p>
+    <h2 class="reveal" style="margin-bottom:40px;max-width:32ch"
+        data-en="The stack behind the work."
+        data-cn="这些技术支撑了我的工作。">The stack behind the work.</h2>
+
+    <div class="reveal">
+      <!-- AI/Agent/AIOps — primary focus -->
+      <div class="stack-group">
+        <div class="stack-label" data-en="AI / Agent / AIOps" data-cn="AI / Agent / AIOps">AI / Agent / AIOps</div>
+        <div class="stack-chips">
+          <span class="stack-chip">LangChain</span>
+          <span class="stack-chip">LangGraph</span>
+          <span class="stack-chip">MCP</span>
+          <span class="stack-chip">RAG</span>
+          <span class="stack-chip">Context Eng</span>
+          <span class="stack-chip secondary">OpenCode</span>
+          <span class="stack-chip secondary">n8n</span>
+          <span class="stack-chip secondary">Prompt Eng</span>
+        </div>
+      </div>
+
+      <!-- Languages & Frameworks -->
+      <div class="stack-group">
+        <div class="stack-label" data-en="Languages &amp; Frameworks" data-cn="语言与框架">Languages &amp; Frameworks</div>
+        <div class="stack-chips">
+          <span class="stack-chip">Java</span>
+          <span class="stack-chip">Spring Boot</span>
+          <span class="stack-chip">Spring Cloud</span>
+          <span class="stack-chip secondary">TypeScript</span>
+          <span class="stack-chip secondary">Python</span>
+          <span class="stack-chip secondary">SQL</span>
+          <span class="stack-chip secondary">Shell</span>
+          <span class="stack-chip secondary">MyBatis</span>
+          <span class="stack-chip secondary">Hibernate</span>
+        </div>
+      </div>
+
+      <!-- Distributed & Data -->
+      <div class="stack-group">
+        <div class="stack-label" data-en="Distributed &amp; Data" data-cn="分布式与数据">Distributed &amp; Data</div>
+        <div class="stack-chips">
+          <span class="stack-chip">Microservices</span>
+          <span class="stack-chip">Kafka</span>
+          <span class="stack-chip">Redis</span>
+          <span class="stack-chip secondary">Zookeeper</span>
+          <span class="stack-chip secondary">RabbitMQ</span>
+          <span class="stack-chip secondary">Oracle</span>
+          <span class="stack-chip secondary">PostgreSQL</span>
+          <span class="stack-chip secondary">MySQL</span>
+          <span class="stack-chip secondary">OpenSearch</span>
+        </div>
+      </div>
+
+      <!-- DevOps/Observability -->
+      <div class="stack-group">
+        <div class="stack-label" data-en="DevOps / Observability" data-cn="DevOps / 可观测性">DevOps / Observability</div>
+        <div class="stack-chips">
+          <span class="stack-chip">OpenTelemetry</span>
+          <span class="stack-chip">Prometheus</span>
+          <span class="stack-chip">Grafana</span>
+          <span class="stack-chip">Docker</span>
+          <span class="stack-chip">K8s</span>
+          <span class="stack-chip secondary">CI/CD</span>
+          <span class="stack-chip secondary">Mimir</span>
+          <span class="stack-chip secondary">Splunk</span>
+          <span class="stack-chip secondary">Tempo</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ─── contact ──────────────────────────────────────────────────── -->
+<section class="section" id="contact" data-od-id="contact" data-component="Contact" style="text-align:center">
+  <div class="container">
+    <p class="eyebrow reveal" style="margin-bottom:10px" data-en="GET IN TOUCH" data-cn="联系方式">GET IN TOUCH</p>
+    <h2 class="reveal" style="margin-bottom:40px"
+        data-en="Let's build something."
+        data-cn="一起做点有意思的事。">Let's build something.</h2>
+
+    <div class="contact-row reveal">
+      <a class="contact-link" href="https://github.com/chingjustwe" target="_blank" rel="noopener">
+        <svg><use href="#i-github"/></svg><span>@chingjustwe</span>
+      </a>
+      <a class="contact-link" href="https://chingjustwe.github.io/" target="_blank" rel="noopener">
+        <svg><use href="#i-monitor"/></svg><span data-en="Blog" data-cn="博客">Blog</span>
+      </a>
+      <a class="contact-link" href="mailto:chingjustwe@live.com">
+        <svg><use href="#i-mail"/></svg><span>chingjustwe@live.com</span>
+      </a>
+      <span class="contact-link" style="cursor:default">
+        <svg><use href="#i-pin"/></svg><span data-en="Hangzhou, China" data-cn="中国 · 杭州">Hangzhou, China</span>
+      </span>
+    </div>
+  </div>
+</section>
+
+</main>
+
+<!-- ─── footer ───────────────────────────────────────────────────── -->
+<footer class="pagefoot" data-od-id="footer" data-component="Footer">
+  <div class="container">
+    <span data-en="2026 Rocky Chi — Built with too much coffee and stubborn SVG." data-cn="2026 Rocky Chi — 用太多咖啡和倔强的 SVG 搭建。">2026 Rocky Chi — Built with too much coffee and stubborn SVG.</span>
+  </div>
+</footer>
+
+<script>
+/* ── language toggle ─────────────────────────────────────────── */
+let lang="en";
+function toggleLang(){
+  lang=(lang==="en")?"cn":"en";
+  const btn=document.getElementById("langBtn");
+  btn.innerHTML='<svg style="display:inline;width:13px;height:13px;vertical-align:-1px;margin-right:3px"><use href="#i-globe"/></svg>'+(lang==="en"?"中文":"EN");
+  document.documentElement.lang=(lang==="en")?"en":"zh";
+  document.body.classList.toggle("lang-cn",lang==="cn");
+  document.querySelectorAll("[data-en]").forEach(el=>{
+    el.innerHTML=el.getAttribute("data-"+lang);
+  });
+}
+
+/* ── scroll reveal ───────────────────────────────────────────── */
+const io=new IntersectionObserver((entries)=>{
+  entries.forEach(e=>{if(e.isIntersecting){e.target.classList.add("visible");io.unobserve(e.target)}});
+},{threshold:0.12,rootMargin:"0px 0px -40px 0px"});
+document.querySelectorAll(".reveal").forEach(el=>io.observe(el));
+
+/* ── active nav highlight ────────────────────────────────────── */
+const sections=document.querySelectorAll("main section[id]");
+const navLinks=document.querySelectorAll(".topnav nav a");
+const navIO=new IntersectionObserver((entries)=>{
+  entries.forEach(e=>{
+    if(e.isIntersecting){
+      navLinks.forEach(l=>l.classList.remove("active"));
+      const link=document.querySelector('.topnav nav a[href="#'+e.target.id+'"]');
+      if(link)link.classList.add("active");
+    }
+  });
+},{threshold:0.3,rootMargin:"-80px 0px -50% 0px"});
+sections.forEach(s=>navIO.observe(s));
+
+/* ── avatar scene dots ───────────────────────────────────────── */
+const dots=document.querySelectorAll("#avatarDots span");
+let activeScene=0;
+setInterval(()=>{
+  dots[activeScene].classList.remove("on");
+  activeScene=(activeScene+1)%4;
+  dots[activeScene].classList.add("on");
+},5000);
+</script>
+</body>
+</html>
