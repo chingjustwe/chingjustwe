@@ -35,8 +35,8 @@
     <td width="33%" valign="top" align="center">
       <img src="assets/project-codecode.svg" width="100%" alt="CodeCode terminal" />
       <h3>💻 CodeCode</h3>
-      <p><sub>Code snippets that actually run. Less README lies, more working examples.</sub></p>
-      <p><code>React</code> · <code>Monaco</code> · <code>Live Code</code></p>
+      <p><sub>A scratch-built AI coding agent client in TypeScript. Multi-provider LLM, native tool-calling, no LangChain.</sub></p>
+      <p><code>TypeScript</code> · <code>Node.js</code> · <code>Multi-LLM</code></p>
       <p><a href="https://chingjustwe.github.io/codecode/">→ live demo</a></p>
     </td>
     <td width="33%" valign="top" align="center">
