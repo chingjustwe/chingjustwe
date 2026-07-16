@@ -21,7 +21,7 @@
   <circle class="tdot y" cx="56" cy="30" r="4"/>
   <circle class="tdot g" cx="70" cy="30" r="4"/>
   <text class="term-title" x="150" y="34" text-anchor="middle">codecode — zsh</text>
-  <text class="term-cmd" x="42" y="62">$ npx codecode init my-project</text>
+  <text class="term-cmd" x="42" y="62">$ npm start</text>
   <text class="term-ok" x="42" y="84">&gt; agent ready.</text>
   <text class="term-in" x="42" y="106">&gt; create a REST API<tspan class="caret">&#9612;</tspan></text>
   <text class="term-ok" x="42" y="128">&gt; API running on :3000</text>
